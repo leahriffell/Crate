@@ -1,4 +1,8 @@
+// This file is imported in api/src/modules/user/revolvers.js (and product/crate/user files that might call it like other resolvers and seeders)
+// This file is also repeated in web/src/setup/config
+// Curly brace is a block
 {
+  // this creates usable params for product
   "product": {
     "types": {
       "cloth": {
@@ -11,13 +15,19 @@
       }
     }
   },
+  // this creates usable params for users
   "user": {
+    // first param is roles
     "roles": {
+      // which has 2 values of admin or user
       "admin": "ADMIN",
       "user": "USER"
     },
+    // next param is gender
     "gender": {
+      // which has 2 values of male/female
       "male": {
+        // each gender also has an id and name
         "id": 1,
         "name": "Male"
       },

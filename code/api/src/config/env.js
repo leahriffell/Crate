@@ -1,3 +1,5 @@
+// This file creates environment variables
+
 // Imports
 import dotenv from 'dotenv'
 

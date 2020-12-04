@@ -1,4 +1,7 @@
+// This is where the the Object Relational Mapping (the technique for converting data between incompatible type systems using OOP) for our data occurs
+
 // Imports
+// This Sequalize object is that actual ORM - it will take our data and make them into objects that our app can use
 import { Sequelize } from 'sequelize'
 
 // App Imports

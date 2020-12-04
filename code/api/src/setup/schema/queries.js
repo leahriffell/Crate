@@ -6,6 +6,7 @@ import * as user from '../../modules/user/query'
 import * as product from '../../modules/product/query'
 import * as crate from '../../modules/crate/query'
 import * as subscription from '../../modules/subscription/query'
+    // everything (*) as one variable from its respective file
 
 // Query
 const query = new GraphQLObjectType({
@@ -21,3 +22,4 @@ const query = new GraphQLObjectType({
 })
 
 export default query
+    // makes part of the index file

@@ -13,7 +13,7 @@ import models from '../../setup/models'
 
 // Create
 // The async and await keywords enable asynchronous, promise-based behavior to be written in a cleaner style, avoiding the need to explicitly configure promise chains (waits for all promises to be resolved)
-// defines and exports the create function
+// defines and exports the create function, parentValue is an operation
 export async function create(parentValue, { name, email, password }) {
   // Users exists with same email check
   // findOne comes from node

@@ -1,6 +1,10 @@
+// creates params for products and users (more granular definition of attributes defined in migration, ex: role can be admin or user)
+// we were doing this in model in rails? 
+
 {
   "product": {
     "types": {
+      // product has 2 types with id and name (1: cloth, 2: accessories)
       "cloth": {
         "id": 1,
         "name": "Cloth"
@@ -13,11 +17,13 @@
   },
   "user": {
     "roles": {
+      // user can have one of two roles (admin or user)
       "admin": "ADMIN",
       "user": "USER"
     },
     "gender": {
       "male": {
+        // user has 2 types of gender, which has id and name (1: male, 2: female)
         "id": 1,
         "name": "Male"
       },

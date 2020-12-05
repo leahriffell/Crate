@@ -1,3 +1,6 @@
+// gets errything started it looks like? all of the modules, graphql, setup uploads, start server
+// not sure when this executes (when the server is started?)
+
 // Imports
 import express from 'express'
 

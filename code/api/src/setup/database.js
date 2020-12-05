@@ -1,3 +1,5 @@
+// create database connection and test it
+
 // Imports
 import { Sequelize } from 'sequelize'
 
@@ -27,4 +29,5 @@ connection
     console.error('ERROR - Unable to connect to the database:', err)
   })
 
+  // make the db connection exportable
 export default connection

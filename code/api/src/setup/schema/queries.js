@@ -1,3 +1,5 @@
+// this file does the same as schema/mutations but for queries
+
 // Imports
 import { GraphQLObjectType } from 'graphql'
 

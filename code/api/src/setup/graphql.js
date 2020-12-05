@@ -1,3 +1,5 @@
+// ** do more research on what is happening here**
+
 // Imports
 import graphqlHTTP from 'express-graphql'
 

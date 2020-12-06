@@ -1,4 +1,7 @@
-// This file is imported in api/src/modules/user/revolvers.js (and product/crate/user files that might call it like other resolvers and seeders)
+// This file is like model enums in rails
+// It defines model 'params' that aren't in the database but are usable for defining or sorting
+// Makes a set list of options for the database to store particularly in an attribute
+
 // This file is also repeated in web/src/setup/config
 // Curly brace is a block
 {

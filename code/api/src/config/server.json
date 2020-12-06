@@ -1,3 +1,7 @@
+// Called in the resolver
+// Defines our port for the api
+//
+
 {
   "port": 8000,
   "secret": "super-secret-key-crate-api",

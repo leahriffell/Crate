@@ -103,8 +103,8 @@ export async function remove(parentValue, { id }) {
 }
 
 // User genders
-// Exports a function for sorting users by gender
+// Exports a function for returning product genders available (for sorting clothing by male female)
 export async function getGenders() {
-  // Returns of users by gender
+  // Returns params of gender male and female
   return Object.values(params.user.gender)
 }

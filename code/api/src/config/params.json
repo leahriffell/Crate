@@ -1,5 +1,4 @@
-// creates params for products and users (more granular definition of attributes defined in migration, ex: role can be admin or user)
-// we were doing this in model in rails? 
+// creates params for products and users (more granular definition of attributes defined in migration, ex: role can be admin or user, like the enum in rails models)
 
 {
   "product": {

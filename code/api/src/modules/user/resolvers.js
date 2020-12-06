@@ -92,6 +92,8 @@ export async function remove(parentValue, { id }) {
 }
 
 // User genders
+// really kind of like product genders (gender lives on product not on user)
+// maybe they originally intended to store gender on users?
 export async function getGenders() {
   return Object.values(params.user.gender)
 }

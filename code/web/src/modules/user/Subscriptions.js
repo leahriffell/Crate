@@ -19,15 +19,28 @@ import SubscriptionItem from '../subscription/Item'
 class Subscriptions extends PureComponent {
 
   // Runs on server only for SSR
+  // server side responsibility 
+  // static method 
+  // means that called on the class itself, not instances of class 
+  // pertains to this class specifically. 
+  // fetches data from the store 
+  // uses store.dispatch to get the user's list of subscriptions
   static fetchData({ store }) {
     return store.dispatch(getListByUser())
   }
 
   // Runs on client only
+  // will run first and then again after state change ^^^ function above 
+  // need to update the server and then the client 
   componentDidMount() {
     this.props.getListByUser()
   }
 
+  // after getting information from server, then will render 
+  // ternary if subscriptions isLoading, the display loading
+  // if not, then checks subscription list length. if greater than 0 (if list exist) 
+  // map over list and render subscription item using each subscription as a prop
+  // or display message 
   render() {
     return (
       <div>
@@ -75,6 +88,7 @@ Subscriptions.propTypes = {
 }
 
 // Component State
+// connect subscriptionsByUser to store 
 function subscriptionsState(state) {
   return {
     subscriptions: state.subscriptionsByUser

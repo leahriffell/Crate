@@ -21,18 +21,28 @@ import { routeImage } from '../../../setup/routes'
 import admin from '../../../setup/routes/admin'
 
 // Component
+// pureComponent handles shouldComponentUpdate method for us
+// will compare props/state behind the scenes to determine render 
 class List extends PureComponent {
 
   // Runs on server only for SSR
+  // fetchData is specific to this product list and not instances of product list 
   static fetchData({ store }) {
     return store.dispatch(getProductList())
   }
 
   // Runs on client only
+  // will get product list when state changes 
+  // first, nothing, then render updated version
   componentDidMount() {
     this.props.getProductList()
   }
 
+  // allows admin to delete product via id 
+  // if id is given, there is a confirmation check 
+  // if check, then api.post request with operation 'removeProduct'
+  // error and success handling based on response 
+  // getProductList(isLoading will be false)
   remove = (id) => {
     if (id > 0) {
       let check = confirm('Are you sure you want to delete this product?')

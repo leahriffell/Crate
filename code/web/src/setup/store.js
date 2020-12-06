@@ -13,6 +13,8 @@ import * as crate from '../modules/crate/api/state'
 
 
 // App Reducer
+// combines reducers from common, user, product, subscription, and crate 
+// give reducers access to the store
 const appReducer = combineReducers({
   common,
   user,
@@ -22,6 +24,8 @@ const appReducer = combineReducers({
 })
 
 // Root Reducer
+// this function only resets the state to undefined if the action is 'RESET' 
+// otherwise, it returns the combinedReducers and passes the state, action for reducer clarification
 export const rootReducer = (state, action) => {
   if (action.type === 'RESET') {
     state = undefined
@@ -38,6 +42,7 @@ if (typeof window !== 'undefined') {
 }
 
 // Store
+// store for everything 
 export const store = createStore(
   rootReducer,
   initialState,

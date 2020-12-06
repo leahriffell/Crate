@@ -19,6 +19,12 @@ import Menu from './Menu'
 import MenuItem from './MenuItem'
 
 // Component
+// styling is incorporated in JSX 
+// all header styling at top, individual styling based on tag
+// each grid can have gridCells 
+// entire header is a grid with multiple cells
+// logo, menu, menuItem are all modular components with own attributes being imported in
+// home, user, crate, admin are all routes being imported in so when a user clicks, it corresponds to correct route
 const Header = (props) => {
   return (
     <header style={{
@@ -76,11 +82,16 @@ const Header = (props) => {
 }
 
 // Component Properties
+// Check to see where these props are coming from
+// proptyes are going to be an object 
 Header.propTypes = {
   user: PropTypes.object.isRequired
 }
 
 // Component State
+// state is being accessed via connect
+// why is there no mapDispatch or mapState?
+// connecting this function with the store
 function headerState(state) {
   return {
     user: state.user

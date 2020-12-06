@@ -44,7 +44,7 @@ class Detail extends PureComponent {
   render() {
     const { isLoading, item, error } = this.props.product
 
-    return (
+    return ( 
       <div>
         {
           !error

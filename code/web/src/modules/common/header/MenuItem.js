@@ -9,6 +9,8 @@ import { primary, secondary } from '../../../ui/common/gradients'
 import { level1 } from '../../../ui/common/shadows'
 
 // Component
+// Hard to identify the props and where they are coming from 
+// isActiveRoute tay
 const MenuItem = (props) => {
   const { children, to, type, active, style, section } = props
 

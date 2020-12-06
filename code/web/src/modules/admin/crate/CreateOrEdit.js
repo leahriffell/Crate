@@ -15,6 +15,7 @@ import { Input, Textarea } from '../../../ui/input'
 import { white } from "../../../ui/common/colors"
 
 // App Imports
+// renamed imports because this helps devs know these actions pertain to the crate
 import admin from '../../../setup/routes/admin'
 import { slug } from '../../../setup/helpers'
 import {
@@ -30,6 +31,7 @@ class CreateOrEdit extends Component {
   constructor(props) {
     super(props)
 
+    // state of the crate
     this.state = {
       isLoading: false,
       crate: {
@@ -42,11 +44,18 @@ class CreateOrEdit extends Component {
     }
   }
 
+  // component did mount will render on load
+  // consider lifecycle of component 
+  // invokes getCrate function using the crate id passed as props
   componentDidMount() {
     // Get crate details (edit case)
     this.getCrate(parseInt(this.props.match.params.id))
   }
 
+  // crateID is passed as argument in getCrateById
+  // appears to be an api call 
+  // response will be crate data and be set to crate state
+  // crate state is id, name, description. 
   getCrate = (crateId) => {
     if (crateId > 0) {
       this.props.getCrateById(crateId)

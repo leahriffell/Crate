@@ -10,6 +10,9 @@ import { textLevel1 } from '../../../ui/common/shadows'
 import home from '../../../setup/routes/home'
 
 // Component
+// others is also used in Menu.js 
+// logo is also the 'take me home' button
+// stying is imported and font size/color is identified in code 
 const Logo = (props) => {
   const { ...others } = props
 

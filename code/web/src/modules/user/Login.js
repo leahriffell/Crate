@@ -24,7 +24,8 @@ import AuthCheck from '../auth/AuthCheck'
 
 // Component
 class Login extends Component {
-
+  // super is crossed out when props is passed in
+  // when I take props out, super has no strikethrough 
   constructor(props) {
     super(props)
 
@@ -38,6 +39,11 @@ class Login extends Component {
     // Function bindings
   }
 
+  // onChange deals with login form inputs 
+  // when a user changes an input field:
+    // the user is set using state 
+    // the email or password is the target and the value is what is in the form input 
+    // then it sets the state of the user with the updated values
   onChange = (event) => {
     let user = this.state.user
     user[event.target.name] = event.target.value
@@ -47,6 +53,15 @@ class Login extends Component {
     })
   }
 
+  // called on form submit
+  // prevent page reload 
+  // show's loading message
+  // invokes login function from props using the state as an argument 
+  // looks like a post request from login action function 
+  // if there's an error, display that via messageShow
+  // then after 5 seconds, hide message
+  // if no error, hide any messages and user is logged in
+  // same error handling for the .catch 
   onSubmit = (event) => {
     event.preventDefault()
 
@@ -73,9 +88,14 @@ class Login extends Component {
       })
   }
 
+  // deconstructured user props
   render() {
     const { isLoading, error } = this.props.user
 
+    // one big grid with helmet, and gridcells within gridcells 
+    // appreciate the labeling of sections, left, right, login form 
+    // see link at bottom that navigates to next part after filling out the form 
+    // does an authCheck from an import down at the bottom after a user has completed the form 
     return (
       <Grid gutter={true} alignCenter={true} style={{ padding: '2em' }}>
         {/* SEO */}
@@ -138,7 +158,7 @@ class Login extends Component {
                 style={{ marginTop: '1em' }}
               />
             </div>
-
+    
             <div style={{ marginTop: '2em' }}>
               {/* Signup link */}
               <Link to={userRoutes.signup.path}>
@@ -161,6 +181,7 @@ class Login extends Component {
 }
 
 // Component Properties
+// these props often use the user object as an argument 
 Login.propTypes = {
   user: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
@@ -169,6 +190,8 @@ Login.propTypes = {
 }
 
 // Component State
+// another way to mapDispatchToProps with updated user information. 
+// updates state.user and key is under user for identificiation in store
 function loginState(state) {
   return {
     user: state.user

@@ -11,6 +11,9 @@ import ScrollToTop from '../../modules/common/ScrollToTop'
 import App from './App'
 
 // User Authentication
+// gets the token item from localStorage
+// if there is a toke, then user and token are dispatched to the store to be held
+// loginSetUserLocalStorageAndCookie uses token and user 
 const token = window.localStorage.getItem('token')
 if (token && token !== 'undefined' && token !== '') {
   const user = JSON.parse(window.localStorage.getItem('user'))
@@ -23,6 +26,7 @@ if (token && token !== 'undefined' && token !== '') {
 }
 
 // Client App
+// This seems to be the client store 
 const Client = () => (
   <Provider store={store} key="provider">
     <Router>

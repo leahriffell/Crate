@@ -16,6 +16,12 @@ import userRoutes from '../../setup/routes/user'
 import { logout } from './api/actions'
 
 // Component
+// need to create edit profile button that links to edit profile form 
+// need to create deliveries button 
+// need to create histories button 
+// possibly do conditional rendering in header. If user is logged in, they can see their history and deliveries via the header/nav bar
+
+// helmet - do we put the profile picture here or in the top title bar?
 const Profile = (props) => (
   <div>
     {/* SEO */}
@@ -53,10 +59,13 @@ Profile.propTypes = {
 }
 
 // Component State
+// looks like it's accessing state from the store and holding it here
 function profileState(state) {
   return {
     user: state.user
   }
 }
 
-export default connect(profileState, { logout })(Profile)
+// might need to create form file and import into profile 
+
+export default connect(profileState, { logout })(Profile) 

@@ -29,7 +29,11 @@ import AdminMenu from '../common/Menu'
 
 // Component
 class CreateOrEdit extends Component {
-
+// crossed out super. Don't think props needs to be passed into super
+// each product has an id, name, slug, description, type, gener, and image
+// slug is referring to unique part of web address. usually last part of url
+// understanding slug will help with route determination 
+// so each product will have their own unique url. 
   constructor(props) {
     super(props)
 
@@ -51,6 +55,12 @@ class CreateOrEdit extends Component {
 
   componentDidMount() {
     // Get product types
+    // props.getProductTypes is coming from product-api-actions
+    // API call 
+    // then take response and if there are errors, show error message
+    // else, update the product gender with the value of the first productType.id 
+    // then set state for rest of product. updating the productType with the response data
+    // error handling. 
     this.props.getProductTypes()
       .then(response => {
         if (response.data.errors && response.data.errors.length > 0) {
@@ -70,6 +80,9 @@ class CreateOrEdit extends Component {
       })
 
     // Get user genders
+    // similar format to function above
+    // specific to gender
+    // updates the product.gender with the response data 
     this.props.getUserGenders()
       .then(response => {
         if (response.data.errors && response.data.errors.length > 0) {
@@ -89,9 +102,13 @@ class CreateOrEdit extends Component {
       })
 
     // Get product details (edit case)
+    // match params id is argument 
     this.getProduct(parseInt(this.props.match.params.id))
   }
 
+  // takes match params id of product, 
+  // then does api call with id to get product 
+  // if no errors, sets the state of the product with the data from the api call 
   getProduct = (productId) => {
     if (productId > 0) {
       this.props.getProductById(productId)
@@ -110,6 +127,13 @@ class CreateOrEdit extends Component {
     }
   }
 
+  // this refers to the form below 
+  // user can update product name and description 
+  // first two lines identify which part of the product will be updated. name or description based on event.target.name
+  // if name, then the slug is updated with the input value 
+  // this updates the unique url of the description 
+  // then sets the state with new information
+  // doesn't update slug if description because that doesn't effect the url. 
   onChange = (event) => {
     let product = this.state.product
     product[event.target.name] = event.target.value
@@ -123,6 +147,12 @@ class CreateOrEdit extends Component {
     })
   }
 
+  // referes to form below 
+  // can select product type and gender from menu 
+  // both type and gender are mapped over using the data from the updated state
+  // so updates the product via getProduct and then uses that information to update the data for the select menu
+  // first two lines determine the type or gender and set value to event.target.value from menu
+  // then sets state
   onChangeSelect = (event) => {
     let product = this.state.product
     product[event.target.name] = parseInt(event.target.value)
@@ -132,6 +162,10 @@ class CreateOrEdit extends Component {
     })
   }
 
+  // on submit of form 
+  // prevent page reload 
+  // set state of isLoading to true 
+  // show message to confirm action is taking place 
   onSubmit = (event) => {
     event.preventDefault()
 
@@ -142,6 +176,10 @@ class CreateOrEdit extends Component {
     this.props.messageShow('Saving product, please wait...')
 
     // Save product
+    // this is an action api post call to update the product on the server side 
+    // sets state of isLoading to false 
+    // message confimirmation if successful. error if not. 
+    // window timeout on messages 
     this.props.productCreateOrUpdate(this.state.product)
       .then(response => {
         this.setState({
@@ -170,6 +208,11 @@ class CreateOrEdit extends Component {
       })
   }
 
+  // upload file part of form 
+  // confirmation message
+  // isLoading is true
+  // form data appends/adds the 'file' using event.target.files
+  // index 0 so that tells me it either always uploads the same file OR it creates a new array of files for every upload
   onUpload = (event) => {
     this.props.messageShow('Uploading file, please wait...')
 
@@ -181,6 +224,14 @@ class CreateOrEdit extends Component {
     data.append('file', event.target.files[0])
 
     // Upload image
+    // inside upload function 
+    // api post request with data from upload 
+    // error/success handling 
+    // updates the file path name with the response.data.file
+    // sets state of product with new product.image file path 
+    // error/success handling 
+    // isLoading is false
+    // message time out
     this.props.upload(data)
       .then(response => {
         if (response.status === 200) {
@@ -211,6 +262,9 @@ class CreateOrEdit extends Component {
       })
   }
 
+  // reminder that is is in ADMIN by looking at the helmet
+  // This is not for the user to update. 
+  // so the user can select a product from their crate 
   render() {
     return (
       <div>

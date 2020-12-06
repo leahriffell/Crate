@@ -11,6 +11,9 @@ import Menu from '../../common/header/Menu'
 import MenuItem from '../../common/header/MenuItem'
 
 // Component
+// creates grid menu for the admin view 
+// each item has a route, type, section, and style 
+// when menuItem is clicked, it will route to path identified in 'to'
 const AdminMenu = () => (
   <Grid style={{ backgroundColor: grey }}>
     <GridCell style={{ padding: '2em', textAlign: 'center' }}>

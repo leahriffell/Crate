@@ -8,6 +8,8 @@ import Layout from '../../modules/common/Layout'
 import NotFound from '../../modules/common/NotFound'
 import RoutePrivate from '../../modules/auth/RoutePrivate'
 
+// this app seems to be our starting point app 
+// in here there is conditional rendering based on route paths 
 const App = () => (
   <Layout>
     <Switch>

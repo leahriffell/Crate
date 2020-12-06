@@ -23,6 +23,8 @@ import { register } from './api/actions'
 import AuthCheck from '../auth/AuthCheck'
 
 // Component
+// same situation with super as in the last Profile component 
+// when i mouse over it, it says something about being deprecated and after looking it up, it's confirmed but still confusion about it. 
 class Signup extends Component {
 
   constructor(props) {
@@ -39,6 +41,10 @@ class Signup extends Component {
     }
   }
 
+  // handles form inputs 
+  // sets user via state
+  // user.name, user.email, user.password will all be updated via the values in the form inputs 
+  // then those values are set to state
   onChange = (event) => {
     let user = this.state.user
     user[event.target.name] = event.target.value
@@ -48,6 +54,15 @@ class Signup extends Component {
     })
   }
 
+  // prevent page reload
+  // set state of isLoading to true and display message to signify loading
+  // props.register is an action that does an axios post call 
+  // then with the data, the state of isLoading is set to false 
+  // Then there is error handling 
+  // if successful, there will be message confirmation
+  // if successful, the history props will receive the user login path to update the route history 
+  // .catch error handling with message
+  // after 5 seconds, the messages will hide themselves and let the user interact again 
   onSubmit = (event) => {
     event.preventDefault()
 
@@ -86,6 +101,8 @@ class Signup extends Component {
       })
   }
 
+  // big grid with gridcells within gridcells 
+  // signup form with an onsubmit function invoked 
   render() {
     return (
       <Grid gutter={true} alignCenter={true} style={{ padding: '2em' }}>

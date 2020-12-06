@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import userRoutes from '../../setup/routes/user'
 
 // Component
+// if the user logs in succefully, they go to thier page, otherwise, they are directed to the login
 const RoutePrivate = (props) => (
   props.user.isAuthenticated
     ? props.role
@@ -24,6 +25,8 @@ RoutePrivate.propTypes = {
 }
 
 // Component State
+// This function is acting as mapStateToState
+
 function routePrivateState(state) {
   return {
     user: state.user

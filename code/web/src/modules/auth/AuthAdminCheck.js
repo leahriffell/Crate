@@ -18,6 +18,8 @@ AuthAdminCheck.propTypes = {
 }
 
 // Component State
+// I am not certain what this function is doing??
+// This is functioning as mapStateToProps
 function authAdminCheckState(state) {
   return {
     user: state.user

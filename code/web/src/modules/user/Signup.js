@@ -23,6 +23,7 @@ import { register } from './api/actions'
 import AuthCheck from '../auth/AuthCheck'
 
 // Component
+// this component ( and form ) could potentially be modified to allow the user to add or update an icon/description/shipping address...
 class Signup extends Component {
 
   constructor(props) {
@@ -39,6 +40,8 @@ class Signup extends Component {
     }
   }
 
+
+// entering username and setting in state
   onChange = (event) => {
     let user = this.state.user
     user[event.target.name] = event.target.value
@@ -63,6 +66,7 @@ class Signup extends Component {
           isLoading: false
         })
 
+// providing user message based on conditional logic for successful completion
         if (response.data.errors && response.data.errors.length > 0) {
           this.props.messageShow(response.data.errors[0].message)
         } else {

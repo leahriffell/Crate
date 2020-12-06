@@ -9,6 +9,7 @@ import crate from '../../setup/routes/crate'
 import admin from '../../setup/routes/admin'
 
 // Component
+// This is routing depending on admin vs user roles
 const AuthCheck = (props) => (
   props.user.isAuthenticated ? (props.user.details.role === 'ADMIN' ? <Redirect to={admin.dashboard.path}/> : <Redirect to={crate.list.path}/>) : ''
 )

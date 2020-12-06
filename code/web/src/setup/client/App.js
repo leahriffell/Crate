@@ -8,6 +8,8 @@ import Layout from '../../modules/common/Layout'
 import NotFound from '../../modules/common/NotFound'
 import RoutePrivate from '../../modules/auth/RoutePrivate'
 
+// User is being directed to the correct path based on authenication from Logging in
+
 const App = () => (
   <Layout>
     <Switch>

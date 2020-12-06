@@ -17,6 +17,7 @@ import {
 // Product list
 
 // Initial State
+// I do not see an id on 'item' or 'product', we will need that for user history
 const productsInitialState = {
   isLoading: false,
   error: null,
@@ -137,4 +138,3 @@ export const productsRelated = (state = productsRelatedInitialState, action) => 
       return state
   }
 }
-

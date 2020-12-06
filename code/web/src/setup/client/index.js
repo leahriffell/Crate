@@ -11,6 +11,8 @@ import ScrollToTop from '../../modules/common/ScrollToTop'
 import App from './App'
 
 // User Authentication
+// this checks local storage on the browser for a token
+// and uses that to get the info for that user
 const token = window.localStorage.getItem('token')
 if (token && token !== 'undefined' && token !== '') {
   const user = JSON.parse(window.localStorage.getItem('user'))
@@ -23,6 +25,7 @@ if (token && token !== 'undefined' && token !== '') {
 }
 
 // Client App
+// This is insuring that the App content displays 
 const Client = () => (
   <Provider store={store} key="provider">
     <Router>

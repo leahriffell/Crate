@@ -1,3 +1,7 @@
+// Routes are defined in a route file and imported
+// We will need to add button to take user to form for editing the profile
+// We will need a button to take user to history (might go on Nav bar)
+// We will need a button for deliveries (might go on Nav bar)
 // Imports
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -16,6 +20,9 @@ import userRoutes from '../../setup/routes/user'
 import { logout } from './api/actions'
 
 // Component
+
+// Defining the Profile component, there is styling and minimal Content
+// We will need to add a link to a form so that the user can update thier info
 const Profile = (props) => (
   <div>
     {/* SEO */}
@@ -33,9 +40,9 @@ const Profile = (props) => (
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4>
-
+// Add user profile image either above or below the name
+// Add user description somewhere on page
         <p style={{ color: grey2, marginBottom: '2em' }}>{props.user.details.email}</p>
-
         <Link to={userRoutes.subscriptions.path}>
           <Button theme="primary">Subscriptions</Button>
         </Link>
@@ -52,7 +59,7 @@ Profile.propTypes = {
   logout: PropTypes.func.isRequired
 }
 
-// Component State
+// this is taking the place of map/dispatchToProps
 function profileState(state) {
   return {
     user: state.user

@@ -1,4 +1,6 @@
 // Imports
+// Probably will not be working in this file, not directly related to profile
+// api calls managed with axios
 import axios from 'axios'
 import { query, mutation } from 'gql-query-builder'
 import cookie from 'js-cookie'
@@ -15,6 +17,7 @@ export const LOGOUT = 'AUTH/LOGOUT'
 // Actions
 
 // Set a user after login or using localStorage token
+// Token is for user authentication to define user role for conditional logic
 export function setUser(token, user) {
   if (token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -26,6 +29,8 @@ export function setUser(token, user) {
 }
 
 // Login a user using credentials
+// this is posting the user request and handling the response,
+// creating actions to create/update data in the store
 export function login(userCredentials, isLoading = true) {
   return dispatch => {
     dispatch({
@@ -77,6 +82,8 @@ export function loginSetUserLocalStorageAndCookie(token, user) {
 }
 
 // Register a user
+// We may be able to modify this action for description/updates
+// Otherwise, we will need a new action
 export function register(userDetails) {
   return dispatch => {
     return axios.post(routeApi, mutation({

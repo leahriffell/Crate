@@ -14,7 +14,8 @@ export const CRATES_GET_RESPONSE = 'CRATES/GET_RESPONSE'
 export const CRATES_GET_FAILURE = 'CRATES/GET_FAILURE'
 
 // Actions
-
+// This could be useful in figuring out user history..
+// check if user got individual crate or subscription and what was in it
 // Get list of crates
 export function getList(orderBy = 'DESC', isLoading = true) {
   return dispatch => {
@@ -94,6 +95,7 @@ export function getById(crateId) {
 }
 
 // Create or update crate
+// this is using conditional logic to create a new crate, if an id for that crate is not found, or to update an existing crate if it is found
 export function createOrUpdate(crate) {
   if (crate.id > 0) {
     return update(crate)
@@ -104,6 +106,7 @@ export function createOrUpdate(crate) {
 }
 
 // Create crate
+// the functions below are the api calls for creating, updating or deleting crates
 export function create(variables) {
   return dispatch => {
     return axios.post(routeApi, mutation({

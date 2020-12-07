@@ -13,7 +13,8 @@ module.exports = {
         password: bcrypt.hashSync('123456', config.saltRounds),
         role: params.user.roles.admin,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        image: 'https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg'
       },
       {
         name: 'The User',
@@ -21,7 +22,8 @@ module.exports = {
         password: bcrypt.hashSync('123456', config.saltRounds),
         role: params.user.roles.user,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        image: 'https://en.pimg.jp/045/948/028/1/45948028.jpg'
       }
     ])
   },

@@ -17,4 +17,17 @@ describe('GraphQL', () => {
         done();
     })
   })
+
+  it('Returns an email address for each user in an All Users request', (done) => {
+    request.post('/graphql')
+    .send({ query: '{ users { email } }'})
+    .expect(200)
+    .end((err,res) => {
+        if (err) return done(err);
+        res.body.data.users.should.be.a('array')
+        res.body.data.users[1].should.have.property('email')
+        expect(res.body.data.users[1].email).to.eq('user@crate.com')
+        done();
+    })
+  })
 });

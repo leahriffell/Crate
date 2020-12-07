@@ -11,10 +11,8 @@ describe('GraphQL', () => {
     .send({ query: '{ user(id: 1) { email } }'})
     .expect(200)
     .end((err,res) => {
-        // res will contain array with one user
         if (err) return done(err);
         res.body.data.user.should.have.property('email')
-        // so this test hits our dev database (seeded from seeders file)
         expect(res.body.data.user.email).to.eq('admin@crate.com')
         done();
     })

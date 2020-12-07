@@ -13,6 +13,7 @@ import { APP_URL } from '../../setup/config/env'
 import home from '../../setup/routes/home'
 
 // Component
+// Compenent will display on a 404 client side error 
 const NotFound = () => (
   <div>
     {/* SEO */}

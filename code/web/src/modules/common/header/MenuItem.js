@@ -9,6 +9,9 @@ import { primary, secondary } from '../../../ui/common/gradients'
 import { level1 } from '../../../ui/common/shadows'
 
 // Component
+// Object.assign copies one or more source objects to a target object, add properties to the assigned objects
+// Current router assigns the style
+// passes children
 const MenuItem = (props) => {
   const { children, to, type, active, style, section } = props
 

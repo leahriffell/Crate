@@ -9,6 +9,7 @@ import { level1, level2, level3, level4 } from "../common/shadows"
 import Icon from '../icon'
 
 // Component
+// Used to upload a photo
 const File = (props) => {
   const { text, style, name, ...other } = props
 

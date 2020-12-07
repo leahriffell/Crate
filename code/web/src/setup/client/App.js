@@ -8,6 +8,9 @@ import Layout from '../../modules/common/Layout'
 import NotFound from '../../modules/common/NotFound'
 import RoutePrivate from '../../modules/auth/RoutePrivate'
 
+// route objects turn to array and mapped over
+// string will print
+// function will run
 const App = () => (
   <Layout>
     <Switch>

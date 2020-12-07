@@ -15,6 +15,7 @@ import EmptyMessage from '../../common/EmptyMessage'
 import AdminMenu from '../common/Menu'
 
 // Component
+// If list.length is greater than 0 then map through to display subscriptions
 class List extends PureComponent {
 
   // Runs on server only for SSR
@@ -103,6 +104,7 @@ List.propTypes = {
 }
 
 // Component State
+// This store gives us subscriptions
 function listState(state) {
   return {
     subscriptions: state.subscriptions

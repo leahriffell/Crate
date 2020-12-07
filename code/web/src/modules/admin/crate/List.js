@@ -20,6 +20,11 @@ import AdminMenu from '../common/Menu'
 import admin from '../../../setup/routes/admin'
 
 // Component
+// Static is a method called directly on the class, without creating an instance/object of the class
+// Can remove a crate based on id
+// Where removeÇrate is called
+// Prompts user with messages
+// Displays crates
 class List extends PureComponent {
 
   // Runs on server only for SSR

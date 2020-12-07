@@ -6,6 +6,9 @@ import * as subscription from './subscription'
 import * as user from './user'
 
 // Admin routes
+// Bundles all endpoints
+// Data we are using
+// Format of the request and response
 const admin = {
   ...dashboard,
   ...product,

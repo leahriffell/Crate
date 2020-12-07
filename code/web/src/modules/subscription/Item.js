@@ -17,6 +17,9 @@ import { messageShow, messageHide } from '../common/api/actions'
 import { remove, getListByUser } from '../subscription/api/actions'
 
 // Component
+// Functionality to remove the crate from a users subscriptions
+// API request to get crates
+// Will render page again with subscriptions once a subscription has been removed
 class Item extends PureComponent {
 
   constructor(props) {

@@ -20,6 +20,8 @@ const cratesInitialState = {
 }
 
 // State
+// Will default to the above state with same properties of isLoading and error
+// List state will be assigned on a successful response
 export const crates = (state = cratesInitialState, action) => {
   switch (action.type) {
     case CRATES_GET_LIST_REQUEST:

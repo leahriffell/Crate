@@ -16,6 +16,7 @@ import { level1 } from '../../ui/common/shadows'
 import { white } from '../../ui/common/colors'
 
 // App Imports
+// Login comes from actions
 import { APP_URL } from '../../setup/config/env'
 import userRoutes from '../../setup/routes/user'
 import { messageShow, messageHide } from '../common/api/actions'
@@ -23,6 +24,11 @@ import { login } from './api/actions'
 import AuthCheck from '../auth/AuthCheck'
 
 // Component
+// Contains controlled login form
+// Holds it's own state
+// Every time there is a change in the login form state will update
+// Temp message displays when logging in
+//
 class Login extends Component {
 
   constructor(props) {
@@ -176,3 +182,6 @@ function loginState(state) {
 }
 
 export default connect(loginState, { login, messageShow, messageHide })(withRouter(Login))
+
+// Generally speaking naming does not matter for mapState and mapDispatch
+// Merely needs to be a function that will return objects

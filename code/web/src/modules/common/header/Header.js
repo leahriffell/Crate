@@ -10,6 +10,7 @@ import { primary as primaryGradient } from '../../../ui/common/gradients'
 import { level1 } from '../../../ui/common/shadows'
 
 // App Imports
+// Nav buttons with respective paths
 import home from '../../../setup/routes/home'
 import user from '../../../setup/routes/user'
 import crate from '../../../setup/routes/crate'

@@ -1,4 +1,5 @@
-// Imports
+// Imports for use of React, PropTypes, Redux, React-Router
+// Also imports React Helmet which is a library that provides an easy way to manage the document head inforation
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -15,6 +16,9 @@ import { Input, Textarea } from '../../../ui/input'
 import { white } from "../../../ui/common/colors"
 
 // App Imports
+// Importing API interactions from /crate/api/actions
+// Importing actions for showing/hiding messages from /common/api/actions
+// Importing slug - slug is the identify portion of a URL address
 import admin from '../../../setup/routes/admin'
 import { slug } from '../../../setup/helpers'
 import {
@@ -25,6 +29,8 @@ import { messageShow, messageHide } from '../../common/api/actions'
 import AdminMenu from '../common/Menu'
 
 // Component
+// Holds the getCrateById fetch
+// Getting crate based on id 
 class CreateOrEdit extends Component {
 
   constructor(props) {

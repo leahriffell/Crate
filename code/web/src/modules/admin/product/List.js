@@ -21,6 +21,9 @@ import { routeImage } from '../../../setup/routes'
 import admin from '../../../setup/routes/admin'
 
 // Component
+// List crates in ascending order
+// Able to remove from list based on an id
+// Path for linking admin
 class List extends PureComponent {
 
   // Runs on server only for SSR

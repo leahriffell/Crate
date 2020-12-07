@@ -1,5 +1,7 @@
 // Imports
 
+// Will hold the state for all subscriptions
+
 // App Imports
 import {
   SUBSCRIPTIONS_GET_LIST_REQUEST,
@@ -62,6 +64,7 @@ const subscriptionsByUserInitialState = {
 }
 
 // State
+// The default state of all subscriptions
 export const subscriptionsByUser = (state = subscriptionsByUserInitialState, action) => {
   switch (action.type) {
     case SUBSCRIPTIONS_GET_LIST_BY_USER_REQUEST:
@@ -94,6 +97,7 @@ export const subscriptionsByUser = (state = subscriptionsByUserInitialState, act
 // Single subscription
 
 // Initial State
+// The default state for a singe subscription
 const subscriptionInitialState = {
   isLoading: false,
   error: null,

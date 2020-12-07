@@ -1,4 +1,5 @@
 // App Imports
+// isEmpty will check to see if an object is in fact empty
 import { isEmpty } from '../../../setup/helpers'
 import { SET_USER, LOGIN_REQUEST, LOGIN_RESPONSE, LOGOUT } from './actions'
 
@@ -10,7 +11,8 @@ export const userInitialState = {
   details: null
 }
 
-// State
+// State - holds the state of the user
+// State will update based on the case
 export default (state = userInitialState, action) => {
   switch (action.type) {
     case SET_USER:

@@ -1,4 +1,5 @@
 // Imports
+// To use axios, gql and cookies
 import axios from 'axios'
 import { query, mutation } from 'gql-query-builder'
 import cookie from 'js-cookie'

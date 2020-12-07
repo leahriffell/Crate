@@ -2,6 +2,7 @@
 import React from 'react'
 
 // Component
+// for a menuItem
 const Menu = (props) => {
   const { children, ...others } = props
 

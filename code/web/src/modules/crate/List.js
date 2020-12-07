@@ -16,6 +16,9 @@ import EmptyMessage from '../common/EmptyMessage'
 import CrateItem from './Item'
 
 // Component
+// Get list by actions
+// Redux hook dispatch is being used
+// Allow you to connect the Redux store and dispatch actions without having to wrap components in connect
 class List extends PureComponent {
 
   // Runs on server only for SSR
@@ -74,6 +77,7 @@ List.propTypes = {
 }
 
 // Component State
+// store has crates
 function listState(state) {
   return {
     crates: state.crates

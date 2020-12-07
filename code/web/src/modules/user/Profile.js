@@ -16,6 +16,9 @@ import userRoutes from '../../setup/routes/user'
 import { logout } from './api/actions'
 
 // Component
+// Renders the profile page
+// UI components are used to render the new components on the profile page
+// State will hold a user object that will include email, picture, address, bio
 const Profile = (props) => (
   <div>
     {/* SEO */}

@@ -1,7 +1,8 @@
 // App Imports
+// state of which messages are being shown
 import { MESSAGE_SHOW, MESSAGE_HIDE } from './actions'
 
-// Initial State
+// Initial State - will always be the default state
 export const commonInitialState = {
   message: {
     text: null,
@@ -10,6 +11,7 @@ export const commonInitialState = {
 }
 
 // State
+// Messages set with a timeout
 export default (state = commonInitialState, action) => {
   switch (action.type) {
     case MESSAGE_SHOW:

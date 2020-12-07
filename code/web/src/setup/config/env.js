@@ -2,6 +2,10 @@
 import dotenv from 'dotenv'
 
 // Load .env
+// Is a node package
+// the environment variable
+// Different envs have differnt URLS because there are 3 deployed versions of the app
+// Different environments will use different urls both for front end routing and back end api
 dotenv.config()
 
 // URL

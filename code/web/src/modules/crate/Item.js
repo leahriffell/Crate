@@ -18,6 +18,15 @@ import { messageShow, messageHide } from '../common/api/actions'
 import { create } from '../subscription/api/actions'
 
 // Component
+// When a user clicks to subscribe
+// Check to see if user has a style
+// If not allow subscription and route to style form
+// Message to alert subscription
+// Action is created from props state
+// Pass through id
+// If no errors subscribed successfully
+// If sucessful, add the subscription path to history
+// Render will show individual cards
 class Item extends PureComponent {
 
   constructor(props) {

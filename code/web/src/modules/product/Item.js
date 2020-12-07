@@ -12,6 +12,8 @@ import { white, grey2, black } from '../../ui/common/colors'
 import { routeImage, routes } from '../../setup/routes'
 
 // Component
+// Renders Card
+// What a subscription card is
 const Item = (props) => {
 
   const { name, slug, description, image } = props.product

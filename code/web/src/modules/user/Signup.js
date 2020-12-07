@@ -23,6 +23,8 @@ import { register } from './api/actions'
 import AuthCheck from '../auth/AuthCheck'
 
 // Component
+// Controlled Form
+// Holds its own state which updates on input change
 class Signup extends Component {
 
   constructor(props) {

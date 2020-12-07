@@ -16,6 +16,10 @@ export const CRATES_GET_FAILURE = 'CRATES/GET_FAILURE'
 // Actions
 
 // Get list of crates
+// Uses action types for crates list that will change isLoading and error message based upon outcome of success or failure
+// Axios post takes in a route and a query object
+// The promise from the POST takes the response object and assigns it to a list that is sent to Store
+
 export function getList(orderBy = 'DESC', isLoading = true) {
   return dispatch => {
     dispatch({
@@ -104,6 +108,9 @@ export function createOrUpdate(crate) {
 }
 
 // Create crate
+// Crate is created based on id.
+// Id comes from routeApi
+// Mutation is a change with a post
 export function create(variables) {
   return dispatch => {
     return axios.post(routeApi, mutation({

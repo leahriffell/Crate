@@ -25,7 +25,7 @@ RoutePrivate.propTypes = {
 }
 
 // Component State
-// This function is acting as mapStateToState
+// This function is acting as mapToState?
 
 function routePrivateState(state) {
   return {

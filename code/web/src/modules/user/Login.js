@@ -1,6 +1,6 @@
 // Imports
 // Looking over this file for understanding how it might impact profile
-// probably not making changes to this file
+// We will probably not be making changes to this file
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'

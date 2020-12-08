@@ -7,6 +7,7 @@ module.exports = {
         type: Sequelize.STRING
       }),
       queryInterface.addColumn('users', 'address_line2', {
+        allowNull: true,
         type: Sequelize.STRING
       }),
       queryInterface.addColumn('users', 'city', {

@@ -17,6 +17,21 @@ module.exports = function(sequelize, DataTypes) {
     },
     image: {
       type: DataTypes.TEXT
+    },
+    address_line1: {
+      type: DataTypes.STRING
+    },
+    address_line2: {
+      type: DataTypes.STRING
+    },
+    city: {
+      type: DataTypes.STRING
+    },
+    state: {
+      type: DataTypes.STRING
+    },
+    zipcode: {
+      type: DataTypes.INTEGER
     }
   })
 

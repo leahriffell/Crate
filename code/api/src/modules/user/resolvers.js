@@ -1,21 +1,30 @@
+// This file tells query or mutation what to send back to the client as a reponse
+
+
 // Imports
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+  // jwt: a compact URL-safe means of representing claims to be transferred between two parties
 
 // App Imports
 import serverConfig from '../../config/server'
+  // Imports server details, what server does one's API talk to
 import params from '../../config/params'
+  // Imports JSON param details about our models
 import models from '../../setup/models'
+  // Imports SQL object database models
 
 // Create
 export async function create(parentValue, { name, email, password }) {
-  // Users exists with same email check
+  // Exports a create function that takes name, email, and a raw password in 'modules/user/mutation.js'
+
+// Users exists with same email check
   const user = await models.User.findOne({ where: { email } })
 
   if (!user) {
-    // User does not exists
+    // User does not exist
     const passwordHashed = await bcrypt.hash(password, serverConfig.saltRounds)
-
+      // User isn't in system so use bcrypt to "password-hash" (aka secure encryption) the password
     return await models.User.create({
       name,
       email,
@@ -28,7 +37,9 @@ export async function create(parentValue, { name, email, password }) {
 }
 
 export async function login(parentValue, { email, password }) {
+  // Exports a login function that takes email and raw password
   const user = await models.User.findOne({ where: { email } })
+     // Defines a user variable that will only save once the database is searched for the user by email
 
   if (!user) {
     // User does not exists

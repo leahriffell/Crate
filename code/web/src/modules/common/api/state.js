@@ -8,7 +8,6 @@ export const commonInitialState = {
     open: false
   }
 }
-// State files seem to house the reducers for each 
 
 // State
 export default (state = commonInitialState, action) => {

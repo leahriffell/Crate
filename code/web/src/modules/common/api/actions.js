@@ -1,6 +1,4 @@
 // Actions Types
-// axios is being used for api calls
-
 import axios from 'axios/index'
 import { routeApi } from '../../../setup/routes'
 

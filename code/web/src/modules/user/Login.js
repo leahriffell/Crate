@@ -1,6 +1,5 @@
 // Imports
-// Looking over this file for understanding how it might impact profile
-// probably not making changes to this file
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -55,9 +54,6 @@ class Login extends Component {
   onSubmit = (event) => {
     event.preventDefault()
 
-    // if there is a response that is an error, show the error message for 5 seconds and then hide it
-    // if there is no response, the catch will do the same thing
-
     this.props.messageShow('Logging in, please wait...')
 
     this.props.login(this.state.user)
@@ -83,9 +79,6 @@ class Login extends Component {
 
   render() {
     const { isLoading, error } = this.props.user
-
-    // css is embedded, rather than a separate files ( this seems to be the case throughout)
-    // lack of aria labels in the form
 
     return (
       <Grid gutter={true} alignCenter={true} style={{ padding: '2em' }}>

@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile should display profile text and buttons 1`] = `
+<div>
+  <div
+    className="jsx-715511798 "
+    style={
+      Object {
+        "backgroundColor": "#f0f0f0",
+      }
+    }
+  >
+    <div
+      className="jsx-230203545 "
+      style={
+        Object {
+          "padding": "2em",
+          "textAlign": "center",
+        }
+      }
+    >
+      <h3
+        className="jsx-1368067487 "
+      >
+        My profile
+      </h3>
+    </div>
+  </div>
+  <div
+    className="jsx-715511798 "
+  >
+    <div
+      className="jsx-230203545 "
+      style={
+        Object {
+          "padding": "2em",
+          "textAlign": "center",
+        }
+      }
+    >
+      <h4
+        className="jsx-3486686285 "
+        style={
+          Object {
+            "marginBottom": "0.5em",
+          }
+        }
+      >
+        Joe User
+      </h4>
+      <p
+        style={
+          Object {
+            "color": "#999999",
+            "marginBottom": "2em",
+          }
+        }
+      >
+        Joe@email.com
+      </p>
+      <a
+        href="/user/subscriptions"
+        onClick={[Function]}
+      >
+        <button
+          className="jsx-1228826222 "
+          disabled={false}
+          type="button"
+        >
+          Subscriptions
+        </button>
+      </a>
+      <button
+        className="jsx-2258186958 "
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "marginLeft": "1em",
+          }
+        }
+        type="button"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</div>
+`;

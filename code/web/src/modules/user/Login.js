@@ -1,8 +1,10 @@
 // Imports
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
+// Learn about Helmet
 import { Helmet } from 'react-helmet'
 
 // UI Imports
@@ -23,7 +25,9 @@ import { login } from './api/actions'
 import AuthCheck from '../auth/AuthCheck'
 
 // Component
+// Class Component (typical form)
 class Login extends Component {
+  // contains local state used to inform the post request
 
   constructor(props) {
     super(props)

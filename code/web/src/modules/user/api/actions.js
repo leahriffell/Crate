@@ -14,7 +14,6 @@ export const LOGOUT = 'AUTH/LOGOUT'
 
 // Actions
 
-// Set a user after login or using localStorage token
 export function setUser(token, user) {
   if (token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -66,17 +65,13 @@ export function login(userCredentials, isLoading = true) {
   }
 }
 
-// Set user token and info in localStorage and cookie
 export function loginSetUserLocalStorageAndCookie(token, user) {
-  // Update token
   window.localStorage.setItem('token', token)
   window.localStorage.setItem('user', JSON.stringify(user))
 
-  // Set cookie for SSR
   cookie.set('auth', { token, user }, { path: '/' })
 }
 
-// Register a user
 export function register(userDetails) {
   return dispatch => {
     return axios.post(routeApi, mutation({
@@ -87,7 +82,6 @@ export function register(userDetails) {
   }
 }
 
-// Log out user and remove token from localStorage
 export function logout() {
   return dispatch => {
     logoutUnsetUserLocalStorageAndCookie()
@@ -100,11 +94,9 @@ export function logout() {
 
 // Unset user token and info in localStorage and cookie
 export function logoutUnsetUserLocalStorageAndCookie() {
-  // Remove token
   window.localStorage.removeItem('token')
   window.localStorage.removeItem('user')
 
-  // Remove cookie
   cookie.remove('auth')
 }
 

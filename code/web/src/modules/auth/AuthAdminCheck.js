@@ -17,7 +17,6 @@ AuthAdminCheck.propTypes = {
   user: PropTypes.object.isRequired
 }
 
-// Component State
 function authAdminCheckState(state) {
   return {
     user: state.user

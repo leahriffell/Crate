@@ -14,8 +14,6 @@ export const CRATES_GET_RESPONSE = 'CRATES/GET_RESPONSE'
 export const CRATES_GET_FAILURE = 'CRATES/GET_FAILURE'
 
 // Actions
-
-// Get list of crates
 export function getList(orderBy = 'DESC', isLoading = true) {
   return dispatch => {
     dispatch({

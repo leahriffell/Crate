@@ -16,6 +16,7 @@ import {
 // Subscriptions list
 
 // Initial State
+// I suspect that this information is not user specific, and that the list in state is a list of possible subscriptions.
 const subscriptionsInitialState = {
   isLoading: false,
   error: null,

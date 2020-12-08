@@ -39,6 +39,7 @@ class Signup extends Component {
     }
   }
 
+
   onChange = (event) => {
     let user = this.state.user
     user[event.target.name] = event.target.value

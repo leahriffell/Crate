@@ -1,5 +1,7 @@
-import React, { Component } form 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { logout } from './api/actions'
 
 
 class ProfilePicture extends Component {
@@ -16,7 +18,9 @@ class ProfilePicture extends Component {
 
   render() {
     return (
-
+      <div>
+      Hello
+      </div>
     )
   }
 }
@@ -27,4 +31,4 @@ function profileState(state) {
   }
 }
 
-export default connect(profileState)(ProfilePicture)
+export default connect(profileState, { logout })(ProfilePicture)

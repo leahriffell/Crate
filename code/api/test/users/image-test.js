@@ -31,4 +31,18 @@ describe('GraphQL', () => {
         done();
     })
   })
+
+  it('Update image url for user with id = 2', (done) => {
+    // can we do an intial test that initial value is img value before update?
+
+    request.post('/graphql')
+    .send({ query: 'mutation { userUpdate(id: 2, image: "updated_img.png") { id image } }'})
+    .expect(200)
+    .end((err,res) => {
+        if (err) return done(err);
+        res.body.data.userUpdate.should.have.property('image')
+        expect(res.body.data.userUpdate.image).to.eq('updated_img.png')
+        done();
+    })
+  })
 });

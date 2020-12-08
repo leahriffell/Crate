@@ -10,10 +10,11 @@
     "db:migrate": "./node_modules/.bin/sequelize db:migrate",
     "db:seed": "./node_modules/.bin/sequelize db:seed:all",
     "start": "nodemon src/index.js --exec babel-node",
+    "start:test": "NODE_ENV=test nodemon src/index.js --exec babel-node",
     "start:prod": "npm run build:prod && npm run start:server",
     "build:prod": "babel src -s -D -d build",
     "start:server": "node build/index.js",
-    "test": "mocha test/*"
+    "test": "mocha src/modules/**/tests/*.test.js"
   },
   "keywords": [],
   "author": "",

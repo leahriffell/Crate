@@ -32,6 +32,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     zipcode: {
       type: DataTypes.INTEGER
+    },
+    description: {
+      type: DataTypes.TEXT
     }
   })
 

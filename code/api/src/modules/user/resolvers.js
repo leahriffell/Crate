@@ -28,11 +28,12 @@ export async function create(parentValue, { name, email, password }) {
 }
 
 // Update user
-export async function update(parentValue, { id, image }, { auth }) {
+export async function update(parentValue, { id, image, description }, { auth }) {
   if(auth.user) {
     const user = await models.User.update(
       {
-        image
+        image,
+        description
       },
       {where: {id}}
     )

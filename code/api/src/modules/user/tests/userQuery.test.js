@@ -8,7 +8,7 @@ const request = require('supertest')(url);
 describe('User queries', () => {
   it('gets information for specific user', (done) => {
     request.post('/graphql')
-    .send({ query: '{ user(id: 2) { image email } }'})
+    .send({ query: '{ user(id: 2) { image email description } }'})
     .expect(200)
     .end((err,res) => {
         if (err) return done(err);
@@ -17,22 +17,28 @@ describe('User queries', () => {
 
         res.body.data.user.should.have.property('email')
         expect(res.body.data.user.email).to.eq('user@crate.com')
+
+        res.body.data.user.should.have.property('description')
+        expect(res.body.data.user.description).to.eq('Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke')
         done();
     })
   });
 
   it('gets information for all users', (done) => {
     request.post('/graphql')
-    .send({ query: '{ users { image email } }'})
+    .send({ query: '{ users { image email description} }'})
     .expect(200)
     .end((err,res) => {
         if (err) return done(err);
         res.body.data.users.should.be.a('array')
-        res.body.data.users[0].should.have.property('image')
-        expect(res.body.data.users[0].image).to.eq('https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg')
+        res.body.data.users[1].should.have.property('image')
+        expect(res.body.data.users[1].image).to.eq('https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg')
 
-        res.body.data.users[0].should.have.property('email')
-        expect(res.body.data.users[0].email).to.eq('admin@crate.com')
+        res.body.data.users[1].should.have.property('email')
+        expect(res.body.data.users[1].email).to.eq('admin@crate.com')
+
+        res.body.data.users[1].should.have.property('email')
+        expect(res.body.data.users[1].description).to.eq("I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave")
         done();
     })
   });

@@ -15,7 +15,12 @@ module.exports = {
         role: params.user.roles.admin,
         createdAt: new Date(),
         updatedAt: new Date(),
-        image: 'https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg'
+        image: 'https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg',
+        address_line1: '1234 There Blvd',
+        address_line2: 'PO BOX 801234',
+        city: 'Denver',
+        state: 'CO',
+        zipcode: 36479
       },
       {
         id: 2,
@@ -25,7 +30,11 @@ module.exports = {
         role: params.user.roles.user,
         createdAt: new Date(),
         updatedAt: new Date(),
-        image: 'https://en.pimg.jp/045/948/028/1/45948028.jpg'
+        image: 'https://en.pimg.jp/045/948/028/1/45948028.jpg',
+        address_line1: '5678 Here Ave',
+        city: 'Pueblo',
+        state: 'CO',
+        zipcode: 85623
       }
     ])
   },

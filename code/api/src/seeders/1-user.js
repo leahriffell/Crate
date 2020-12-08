@@ -20,7 +20,8 @@ module.exports = {
         address_line2: 'PO BOX 801234',
         city: 'Denver',
         state: 'CO',
-        zipcode: 36479
+        zipcode: 36479,
+        description: "I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave"
       },
       {
         id: 2,
@@ -34,7 +35,8 @@ module.exports = {
         address_line1: '5678 Here Ave',
         city: 'Pueblo',
         state: 'CO',
-        zipcode: 85623
+        zipcode: 85623,
+        description: 'Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke'
       }
     ])
   },

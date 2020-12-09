@@ -28,16 +28,21 @@ export async function create(parentValue, { name, email, password }) {
 }
 
 // Update user
-export async function update(parentValue, { id, image, description }, { auth }) {
+export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode }, { auth }) {
   if(auth.user) {
     const user = await models.User.update(
       {
         image,
-        description
+        description,
+        address_line1,
+        address_line2,
+        city,
+        state,
+        zipcode
       },
       {where: {id}}
     )
-    
+
     if(!user) {
       throw Error('No user exists.')
     } else {
@@ -89,7 +94,7 @@ export async function getAll() {
   return await models.User.findAll()
 }
 
-// Delete
+// Delete user
 export async function remove(parentValue, { id }) {
   return await models.User.destroy({ where: { id } })
 }

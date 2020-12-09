@@ -110,4 +110,23 @@ describe('Reducers', () => {
 
          expect(newUserLogout).toEqual(expectedOutput)
     });
-})
+
+    it('should return the initial state if there is no action type that matches', () => {
+
+        const mockNoType = {
+            type: '',
+            user: null
+        };
+
+        const expectedNoTypeOutput = {
+            error: null,
+            isLoading: false,
+            isAuthenticated: false,
+            details: null
+        };
+
+        const noType = reducers(mockDefaultState, mockNoType)
+
+        expect(noType).toEqual(expectedNoTypeOutput)
+    })
+});

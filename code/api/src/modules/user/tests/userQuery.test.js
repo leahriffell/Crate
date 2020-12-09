@@ -31,14 +31,14 @@ describe('User queries', () => {
     .end((err,res) => {
         if (err) return done(err);
         res.body.data.users.should.be.a('array')
-        res.body.data.users[1].should.have.property('image')
-        expect(res.body.data.users[1].image).to.eq('https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg')
+        res.body.data.users[0].should.have.property('image')
+        expect(res.body.data.users[0].image).to.eq('https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg')
 
-        res.body.data.users[1].should.have.property('email')
-        expect(res.body.data.users[1].email).to.eq('admin@crate.com')
+        res.body.data.users[0].should.have.property('email')
+        expect(res.body.data.users[0].email).to.eq('admin@crate.com')
 
-        res.body.data.users[1].should.have.property('email')
-        expect(res.body.data.users[1].description).to.eq("I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave")
+        res.body.data.users[0].should.have.property('email')
+        expect(res.body.data.users[0].description).to.eq("I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave")
         done();
     })
   });

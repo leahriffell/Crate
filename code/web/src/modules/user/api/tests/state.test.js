@@ -58,7 +58,7 @@ describe('Reducers', () => {
          expect(newUserLogin).toEqual(expectedOutput)
     });
 
-    it ('should return with an object if the type is === LOGIN_RESPONSE', () => {
+    it('should return with an object if the type is === LOGIN_RESPONSE', () => {
 
         const mockUser = {
             type: 'AUTH/LOGIN_RESPONSE',
@@ -89,5 +89,25 @@ describe('Reducers', () => {
 
          expect(newUserLogin).toEqual(expectedFalseOutput)
          expect(newUserLoginError).toEqual(expectedTrueOutput)
-    })
+    });
+
+    it('should return with an object if the type is === LOGOUT', () => {
+
+        const mockUser = {
+            type: 'AUTH/LOGOUT',
+            user: null  
+         };
+
+         const expectedOutput = {
+            error: null,
+            isLoading: false,
+            isAuthenticated: false,
+            details: null
+         }
+
+         const newUserLogout = reducers(mockDefaultState, mockUser)
+         
+
+         expect(newUserLogout).toEqual(expectedOutput)
+    });
 })

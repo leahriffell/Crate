@@ -8,7 +8,7 @@ const request = require('supertest')(url);
 describe('User queries', () => {
   it('gets information for specific user', (done) => {
     request.post('/graphql')
-    .send({ query: '{ user(id: 2) { image email description } }'})
+    .send({ query: '{ user(id: 2) { image email description address_line1 address_line2 city state zipcode } }'})
     .expect(200)
     .end((err,res) => {
         if (err) return done(err);
@@ -20,13 +20,29 @@ describe('User queries', () => {
 
         res.body.data.user.should.have.property('description')
         expect(res.body.data.user.description).to.eq('Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke')
+
+        res.body.data.user.should.have.property('address_line1')
+        expect(res.body.data.user.address_line1).to.eq('5678 Here Ave')
+
+        res.body.data.user.should.have.property('address_line2')
+        expect(res.body.data.user.address_line2).to.eq(null)
+
+        res.body.data.user.should.have.property('city')
+        expect(res.body.data.user.city).to.eq('Pueblo')
+
+        res.body.data.user.should.have.property('state')
+        expect(res.body.data.user.state).to.eq('CO')
+
+        res.body.data.user.should.have.property('zipcode')
+        expect(res.body.data.user.zipcode).to.eq(85623)
+
         done();
     })
   });
 
   it('gets information for all users', (done) => {
     request.post('/graphql')
-    .send({ query: '{ users { image email description} }'})
+    .send({ query: '{ users { image email description address_line1 address_line2 city state zipcode } }'})
     .expect(200)
     .end((err,res) => {
         if (err) return done(err);
@@ -37,8 +53,24 @@ describe('User queries', () => {
         res.body.data.users[0].should.have.property('email')
         expect(res.body.data.users[0].email).to.eq('admin@crate.com')
 
-        res.body.data.users[0].should.have.property('email')
+        res.body.data.users[0].should.have.property('description')
         expect(res.body.data.users[0].description).to.eq("I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave")
+
+        res.body.data.users[0].should.have.property('address_line1')
+        expect(res.body.data.users[0].address_line1).to.eq('1234 There Blvd')
+
+        res.body.data.users[0].should.have.property('address_line2')
+        expect(res.body.data.users[0].address_line2).to.eq('PO BOX 801234')
+
+        res.body.data.users[0].should.have.property('city')
+        expect(res.body.data.users[0].city).to.eq('Denver')
+
+        res.body.data.users[0].should.have.property('state')
+        expect(res.body.data.users[0].state).to.eq('CO')
+
+        res.body.data.users[0].should.have.property('zipcode')
+        expect(res.body.data.users[0].zipcode).to.eq(36479)
+
         done();
     })
   });

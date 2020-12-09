@@ -128,5 +128,5 @@ describe('Reducers', () => {
         const noType = reducers(mockDefaultState, mockNoType)
 
         expect(noType).toEqual(expectedNoTypeOutput)
-    })
+    });
 });

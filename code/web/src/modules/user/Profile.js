@@ -38,6 +38,7 @@ const Profile = (props) => (
         <ProfilePicture />
         <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4>
         <p style={{ color: grey2, marginBottom: '2em' }}>{props.user.details.email}</p>
+        <Button style={{ margin: '0.5em'}} theme="primary">Edit Profile</Button>
         <Link to={userRoutes.subscriptions.path}>
           <Button theme="primary">Subscriptions</Button>
         </Link>

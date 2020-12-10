@@ -1,11 +1,33 @@
+// Test environment/assertions setup
 const chai = require('chai');
-
 const expect = chai.expect;
 const should = chai.should();
+// Making requests in your test setup
 const url = `http://localhost:8000/`;
 const request = require('supertest')(url);
+// Adding in connection to database/graphql/server
+import express from 'express'
+import graphqlHTTP from 'express-graphql'
+import schema from '../../../setup/schema'
+import connection from '../../../setup/database'
 
 describe('User queries', () => {
+  let server;
+
+  before(() => {
+    server = express();
+    server.use('/',
+      graphqlHTTP({
+        schema: schema,
+        graphiql: false
+      })
+    );
+  })
+
+  after(async () => {
+    connection.close;
+  })
+
   it('gets information for specific user', (done) => {
     request.post('/graphql')
     .send({ query: '{ user(id: 2) { image email description address_line1 address_line2 city state zipcode } }'})

@@ -28,8 +28,9 @@ export async function create(parentValue, { name, email, password }) {
 }
 
 // Update user
-export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode }, { auth }) {
-  if(auth.user) {
+// export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode }, { auth }) {
+export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode }) {
+  // if(auth.user) {
     const user = await models.User.update(
       {
         image,
@@ -48,9 +49,9 @@ export async function update(parentValue, { id, image, description, address_line
     } else {
       return await models.User.findOne({ where: { id } })
     };
-  } else {
-    throw new Error('Operation denied.')
-  }
+  // } else {
+  //   throw new Error('Operation denied.')
+  // }
 }
 
 export async function login(parentValue, { email, password }) {

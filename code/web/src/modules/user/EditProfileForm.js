@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { logout } from './api/actions'
+import { logout, editProfile } from './api/actions'
 import { Grid, GridCell } from '../../ui/grid'
 import { Helmet } from 'react-helmet'
 import { Link, withRouter } from 'react-router-dom'
@@ -31,18 +31,18 @@ class EditProfileForm extends Component {
   onChange = (event) => {
     let user = this.state.user
     user[event.target.name] = event.target.value
-
+    console.log(event.target.value)
     this.setState({
       user
     })
   }
 
   onSubmit = (event) => {
-    event.preventDefault()
-
     this.setState({
       isLoading: true
     })
+    console.log(this.state.user)
+    this.props.editProfile(this.state.user)
   }
     //this.props.messageShow('Signing you up, please wait...')
 
@@ -84,7 +84,7 @@ class EditProfileForm extends Component {
         </Helmet>
 
           {/* Edit Info Form */}
-          <form onSubmit={this.onSubmit}>
+          <form>
             <div style={{ width: '25em', margin: '0 auto' }}>
               {/* Name */}
               <Input
@@ -123,7 +123,8 @@ class EditProfileForm extends Component {
 
               {/* Image */}
               <Input
-                type="image"
+                type="file"
+                accept="image/*"
                 fullWidth={true}
                 placeholder="Image"
                 name="image"
@@ -168,12 +169,12 @@ class EditProfileForm extends Component {
             </div>
 
             <div style={{ marginTop: '2em' }}>
-              {/* Profile Form link */}
-              <Link to={userRoutes.editProfile.path}>
-                <Button type="button" style={{ marginRight: '0.5em' }}>Submit</Button>
-              </Link>
+            {/* Profile Form link */}
+            <Link to={userRoutes.profile.path}>
+              <Button type="button" onClick={this.onSubmit} style={{ marginRight: '0.5em' }}>Submit</Button>
+            </Link>
 
-              {/* Form submit */}
+            {/* Form submit */}
             </div>
           </form>
 
@@ -190,4 +191,4 @@ function profileState(state) {
   }
 }
 
-export default connect(profileState, { logout })(EditProfileForm)
+export default connect(profileState, { logout, editProfile })(EditProfileForm)

@@ -3,8 +3,8 @@ const chai = require('chai');
 const expect = chai.expect;
 const should = chai.should();
 // Making requests in your test setup
-const url = `http://localhost:8000/`;
-const request = require('supertest')(url);
+// const url = `http://localhost:8000/`;
+const request = require('supertest');
 // Adding in connection to database/graphql/server
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
@@ -28,12 +28,14 @@ describe('User queries', () => {
     connection.close;
   })
 
-  it('gets information for specific user', (done) => {
-    request.post('/graphql')
+  it('gets information for specific user', async (done) => {
+    await request(server)
+    .post('/')
     .send({ query: '{ user(id: 2) { image email description address_line1 address_line2 city state zipcode } }'})
     .expect(200)
     .end((err,res) => {
         if (err) return done(err);
+        console.log(res.body, "Query test - connects to dev, calls user 2")
         res.body.data.user.should.have.property('image')
         expect(res.body.data.user.image).to.eq('https://en.pimg.jp/045/948/028/1/45948028.jpg')
 
@@ -62,8 +64,9 @@ describe('User queries', () => {
     })
   });
 
-  it('gets information for all users', (done) => {
-    request.post('/graphql')
+  it('gets information for all users', async (done) => {
+    await request(server)
+    .post('/')
     .send({ query: '{ users { image email description address_line1 address_line2 city state zipcode } }'})
     .expect(200)
     .end((err,res) => {

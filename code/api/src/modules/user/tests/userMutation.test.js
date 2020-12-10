@@ -34,6 +34,8 @@ describe('User mutations', () => {
 
   beforeEach(async () => {
     // Assigned the dummy_user global variable to model creation (allows use outside this block from ln 23)
+
+    // FOUND OUT SOMETHING: This user is created in DEV, however, we are testing DEV
     dummy_user = await models.User.create({
       name: 'Dummy User',
       email: 'dummy@crate.com',
@@ -46,8 +48,6 @@ describe('User mutations', () => {
       state: 'State',
       zipcode: 11111
     });
-
-    console.log(dummy_user.name);
   })
 
   afterEach(async () => {
@@ -60,11 +60,11 @@ describe('User mutations', () => {
 
   it('Update attributes for dummy user', async (done) => {
     const id =  dummy_user.id;
-    const response = await request(server)
+    await request(server)
     .post('/')
     .send({
       query:
-        `mutation { userUpdate(id: ${id}, image: "updated_img.png", description: "new day, new me", address_line1: "NEW ADDRESS LINE 1", address_line2: "NEW ADDRESS LINE 2", city: "NEW CITY", state: "AA", zipcode: 00000 ) { id image description address_line1 address_line2 city state zipcode } }`
+        `mutation { userUpdate(id: ${id}, image: "updated_img.png", description: "new day, new me", address_line1: "NEW ADDRESS LINE 1", address_line2: "NEW ADDRESS LINE 2", city: "NEW CITY", state: "AA" ) { id image description address_line1 address_line2 city state } }`
     })
     .expect(200)
     .end((err,res) => {

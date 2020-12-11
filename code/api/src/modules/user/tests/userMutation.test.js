@@ -2,17 +2,14 @@
 const chai = require('chai');
 const expect = chai.expect;
 const should = chai.should();
-// Making requests in your test setup
-// const url = `http://localhost:8000/`;
-const request = require('supertest');
-// pulled this from resolver file where they also talk to the database
+// Database/Dummy data
 import models from '../../../setup/models'
 const User = require('../model');
-// pulled these from the seeders file where we know they are talking to the database
 const bcrypt = require('bcrypt');
 const config = require('../../../config/server.json');
 const params = require('../../../config/params.json');
-// Adding in connection to database/graphql/server
+// Connecting to the server
+const request = require('supertest');
 import express from 'express'
 import graphqlHTTP from 'express-graphql'
 import schema from '../../../setup/schema'
@@ -30,6 +27,7 @@ describe('User mutations', () => {
         graphiql: false
       })
     );
+    console.log("INFO - Server started.");
   })
 
   beforeEach(async () => {
@@ -48,43 +46,71 @@ describe('User mutations', () => {
       state: 'State',
       zipcode: 11111
     });
+    console.log("INFO - Dummy user created.");
   })
 
   afterEach(async () => {
     await models.User.destroy({ where: {id: dummy_user.id} })
+    console.log("INFO - Dummy user destroyed.");
   })
 
   after(async () => {
     await connection.close;
+    console.log("INFO - Connection to server stopped.");
   })
 
-  it('Update attributes for dummy user', async (done) => {
+  it('Update attributes for dummy user', async () => {
     const id =  dummy_user.id;
-    await request(server)
-    .post('/')
-    .send({
-      query:
-        `mutation { userUpdate(id: ${id}, image: "updated_img.png", description: "new day, new me", address_line1: "NEW ADDRESS LINE 1", address_line2: "NEW ADDRESS LINE 2", city: "NEW CITY", state: "AA" ) { id image description address_line1 address_line2 city state } }`
-    })
-    .expect(200)
-    .end((err,res) => {
-      // Tests the graphql response
-        if (err) return done(err);
-        res.body.data.userUpdate.should.have.property('image')
-        expect(res.body.data.userUpdate.image).to.eq('updated_img.png')
+    const user_mutation = await request(server)
+      .post('/')
+      .send({
+        query:
+          `mutation { userUpdate(id: ${id}, image: "updated_img.png", description: "new day, new me", address_line1: "NEW ADDRESS LINE 1", address_line2: "NEW ADDRESS LINE 2", city: "NEW CITY", state: "AA", zipcode: 11111 ) { id image description address_line1 address_line2 city state zipcode } }`
+      });
+    user_mutation.body.data.userUpdate.should.have.property('image')
+    expect(user_mutation.body.data.userUpdate.image).to.eq('updated_img.png')
 
-        res.body.data.userUpdate.should.have.property('description')
-        expect(res.body.data.userUpdate.description).to.eq('new day, new me')
+    user_mutation.body.data.userUpdate.should.have.property('description')
+    expect(user_mutation.body.data.userUpdate.description).to.eq('new day, new me')
 
-        res.body.data.userUpdate.should.have.property('address_line1')
-        expect(res.body.data.userUpdate.address_line1).to.eq('NEW ADDRESS LINE 1')
-        done();
-    })
+    user_mutation.body.data.userUpdate.should.have.property('address_line1')
+    expect(user_mutation.body.data.userUpdate.address_line1).to.eq('NEW ADDRESS LINE 1')
+
+    user_mutation.body.data.userUpdate.should.have.property('address_line2')
+    expect(user_mutation.body.data.userUpdate.address_line2).to.eq('NEW ADDRESS LINE 2')
+
+    user_mutation.body.data.userUpdate.should.have.property('city')
+    expect(user_mutation.body.data.userUpdate.city).to.eq('NEW CITY')
+
+    user_mutation.body.data.userUpdate.should.have.property('state')
+    expect(user_mutation.body.data.userUpdate.state).to.eq('AA')
+
+    user_mutation.body.data.userUpdate.should.have.property('zipcode')
+    expect(user_mutation.body.data.userUpdate.zipcode).to.eq(11111)
+
     // Tests that the database itself was updated
-    //findByPk = rails find (id) VS findOne = rails find_by (any attribute)
-    const database_update = await models.User.findByPk(id)
+    const database_update = await models.User.findByPk(id) //findByPk = rails find (id) VS findOne = rails find_by (any attribute)
     expect(database_update.image).to.eq('updated_img.png')
     expect(database_update.description).to.eq('new day, new me')
     expect(database_update.address_line1).to.eq('NEW ADDRESS LINE 1')
+    expect(database_update.address_line2).to.eq('NEW ADDRESS LINE 2')
+    expect(database_update.city).to.eq('NEW CITY')
+    expect(database_update.state).to.eq('AA')
+    expect(database_update.zipcode).to.eq(11111);
+  });
+
+  it('attempts to update user without response request', async () => {
+    const id =  dummy_user.id;
+    const bad_mutation = await request(server)
+      .post('/')
+      .send({
+        query:
+          `mutation { userUpdate(id: ${id}, image: "updated_img.png", description: "new day, new me", address_line1: "NEW ADDRESS LINE 1") {} }`
+      });
+    expect(bad_mutation.status).to.eq(400);
+    bad_mutation.body.should.have.property('errors')
+    bad_mutation.body.errors[0].should.have.property('message')
+    bad_mutation.body.errors[0].message.should.be.a('string');
+    expect(bad_mutation.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
   });
 });

@@ -37,7 +37,7 @@ export async function update(parentValue, { id, image, description }, { auth }) 
       },
       {where: {id}}
     )
-    
+
     if(!user) {
       throw Error('No user exists.')
     } else {
@@ -68,7 +68,8 @@ export async function login(parentValue, { email, password }) {
         id: userDetails.id,
         name: userDetails.name,
         email: userDetails.email,
-        role: userDetails.role
+        role: userDetails.role,
+        image: userDetails.image
       }
 
       return {

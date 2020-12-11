@@ -104,6 +104,11 @@ export const userUpdate = {
     zipcode: {
       name: 'zipcode',
       type: GraphQLInt
+    },
+
+    email: {
+      name: 'email',
+      type: GraphQLString
     }
   },
   resolve: update

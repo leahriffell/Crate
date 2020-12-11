@@ -29,7 +29,7 @@ export async function create(parentValue, { name, email, password }) {
 
 // Update user
 // export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode }, { auth }) {
-export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode }) {
+export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode, email }) {
   // if(auth.user) {
     const user = await models.User.update(
       {
@@ -39,7 +39,8 @@ export async function update(parentValue, { id, image, description, address_line
         address_line2,
         city,
         state,
-        zipcode
+        zipcode,
+        email
       },
       {where: {id}}
     )
@@ -74,7 +75,8 @@ export async function login(parentValue, { email, password }) {
         id: userDetails.id,
         name: userDetails.name,
         email: userDetails.email,
-        role: userDetails.role
+        role: userDetails.role,
+        image: userDetails.image
       }
 
       return {

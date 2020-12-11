@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Helmet } from 'react-helmet'
 import { Link } from 'react-router-dom'
+import ProfilePicture from './ProfilePicture'
 
 // UI Imports
 import { Grid, GridCell } from '../../ui/grid'
@@ -34,8 +35,14 @@ const Profile = (props) => (
 
     <Grid>
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
+        <ProfilePicture />
         <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4>
         <p style={{ color: grey2, marginBottom: '2em' }}>{props.user.details.email}</p>
+
+        <Link to={userRoutes.editProfile.path}>
+          <Button style={{ margin: '0.5em'}} theme="primary">Edit Profile</Button>
+        </Link>
+
         <Link to={userRoutes.subscriptions.path}>
           <Button theme="primary">Subscriptions</Button>
         </Link>

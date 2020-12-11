@@ -26,19 +26,22 @@ describe('User queries', () => {
 
   it('gets information for all users', (done) => {
     request.post('/graphql')
-    .send({ query: '{ users { image email description} }'})
+    .send({ query: '{ users { id image email description} }'})
     .expect(200)
     .end((err,res) => {
         if (err) return done(err);
         res.body.data.users.should.be.a('array')
-        res.body.data.users[0].should.have.property('image')
-        expect(res.body.data.users[0].image).to.eq('https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg')
 
-        res.body.data.users[0].should.have.property('email')
-        expect(res.body.data.users[0].email).to.eq('admin@crate.com')
+        const admin = res.body.data.users.find(user => {return user.id === 1});
+  
+        admin.should.have.property('image')
+        expect(admin.image).to.eq('https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg')
 
-        res.body.data.users[0].should.have.property('email')
-        expect(res.body.data.users[0].description).to.eq("I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave")
+        admin.should.have.property('email')
+        expect(admin.email).to.eq('admin@crate.com')
+
+        admin.should.have.property('email')
+        expect(admin.description).to.eq("I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave")
         done();
     })
   });

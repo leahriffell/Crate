@@ -44,6 +44,11 @@ export const userUpdate = {
     description: {
       name: 'description',
       type: GraphQLString
+    },
+
+    email: {
+      name: 'email',
+      type: GraphQLString
     }
   },
   resolve: update

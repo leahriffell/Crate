@@ -28,12 +28,18 @@ export async function create(parentValue, { name, email, password }) {
 }
 
 // Update user
-export async function update(parentValue, { id, image, description, email }, { auth }) {
-  if(auth.user) {
+// export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode }, { auth }) {
+export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode, email }) {
+  // if(auth.user) {
     const user = await models.User.update(
       {
         image,
         description,
+        address_line1,
+        address_line2,
+        city,
+        state,
+        zipcode,
         email
       },
       {where: {id}}
@@ -44,9 +50,9 @@ export async function update(parentValue, { id, image, description, email }, { a
     } else {
       return await models.User.findOne({ where: { id } })
     };
-  } else {
-    throw new Error('Operation denied.')
-  }
+  // } else {
+  //   throw new Error('Operation denied.')
+  // }
 }
 
 export async function login(parentValue, { email, password }) {
@@ -91,7 +97,7 @@ export async function getAll() {
   return await models.User.findAll()
 }
 
-// Delete
+// Delete user
 export async function remove(parentValue, { id }) {
   return await models.User.destroy({ where: { id } })
 }

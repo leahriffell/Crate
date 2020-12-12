@@ -29,18 +29,21 @@ export async function create(parentValue, { name, email, password }) {
 
 // Update user
 // export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode }, { auth }) {
-export async function update(parentValue, { id, image, description, address_line1, address_line2, city, state, zipcode, email }) {
+export async function update(parentValue, { id, name, email, password, image, description, address_line1, address_line2, city, state, zipcode }) {
   // if(auth.user) {
     const user = await models.User.update(
       {
+        id,
+        name,
+        email,
+        password,
         image,
         description,
         address_line1,
         address_line2,
         city,
         state,
-        zipcode,
-        email
+        zipcode
       },
       {where: {id}}
     )

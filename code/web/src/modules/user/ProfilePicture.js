@@ -1,28 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { logout } from './api/actions'
-import { upload } from '../common/api/actions'
+// import { upload } from '../common/api/actions';
+import { login } from './api/actions'
+import profileImage from '../../setup/routes/user'
 
 
 class ProfilePicture extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
       image: '',
+      id: ''
     }
   }
 
   componentDidMount(props) {
-    this.setState({ image: this.props.user.details.image})
+    this.setState({ 
+      image: this.props.user.details.image,
+      id: this.props.user.details.id
+    })
   }
 
   render(props) {
 
       return (
         <div>
-          <img src={this.state.image} />
+          <img src={ this.state.image } />
         </div>
       )
   }
@@ -36,4 +40,4 @@ function profileState(state) {
 
 
 
-export default connect(profileState, { upload })(ProfilePicture)
+export default connect(profileState, { login })(ProfilePicture)

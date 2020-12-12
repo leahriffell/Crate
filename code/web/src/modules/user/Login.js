@@ -34,7 +34,7 @@ class Login extends Component {
     this.state = {
       user: {
         email: '',
-        password: '',
+        password: ''
       }
     }
 

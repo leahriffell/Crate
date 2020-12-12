@@ -1,5 +1,5 @@
 // Imports
-import { GraphQLString, GraphQLInt } from 'graphql'
+import { GraphQLString, GraphQLInt, GraphQLObjectType } from 'graphql'
 
 // App Imports
 import { UserType } from './types'

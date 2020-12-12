@@ -79,7 +79,13 @@ export async function login(parentValue, { email, password }) {
         name: userDetails.name,
         email: userDetails.email,
         role: userDetails.role,
-        image: userDetails.image
+        image: userDetails.image, 
+        description: userDetails.description, 
+        address_line1: userDetails.address_line1,
+        address_line2: userDetails.address_line2, 
+        city: userDetails.city,
+        state: userDetails.state,
+        zipcode: userDetails.zipcode
       }
 
       return {

@@ -12,6 +12,7 @@ export const LOGIN_RESPONSE = 'AUTH/LOGIN_RESPONSE'
 export const SET_USER = 'AUTH/SET_USER'
 export const LOGOUT = 'AUTH/LOGOUT'
 export const EDIT_PROFILE = 'EDIT_PROFILE'
+export const GET_USER = 'GET_USER'
 
 
 // Actions
@@ -37,7 +38,7 @@ export function login(userCredentials, isLoading = true) {
     return axios.post(routeApi, query({
       operation: 'userLogin',
       variables: userCredentials,
-      fields: ['user {name, email, role, image}', 'token']
+      fields: ['user {id, name, email, role, image, description}', 'token']
     }))
       .then(response => {
         let error = ''
@@ -86,14 +87,43 @@ export function register(userDetails) {
 
 export function editProfile(user) {
   return dispatch => {
-    return axios.post(routeApi, mutation({
-      operation: 'userUpdate',
-      variables: user,
-      fields: ['id', 'image']
-    }))
     dispatch({
       type: EDIT_PROFILE,
       user
+    })
+    return axios.post(routeApi, mutation({
+      operation: 'userUpdate',
+      variables: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        image: user.image,
+        description: user.description
+      },
+      fields: ['id, name, email, image, description']
+    }))
+     .then(response => {
+       const user = response.data.data.userUpdate
+       getUserData(user)
+     })
+  }
+}
+
+export function getUserData(user) {
+  return dispatch => {
+    dispatch({ 
+      type: GET_USER,
+      user
+    })
+    return axios.post(routeApi, query({
+      operation: 'user',
+      variables: {
+        id: user.id
+      },
+      fields: ['id, name, email, image, description']
+    }))
+     .then(response => {
+       console.log(response)
     })
   }
 }

@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { logout, editProfile } from './api/actions'
+import { editProfile } from './api/actions'
 import { Grid, GridCell } from '../../ui/grid'
 import { Helmet } from 'react-helmet'
 import { Link, withRouter } from 'react-router-dom'
 import Input from '../../ui/input/Input'
 import userRoutes from '../../setup/routes/user'
 import Button from '../../ui/button'
+import profileImage from '../../setup/routes/user'
+
 
 class EditProfileForm extends Component {
   constructor(props) {
@@ -16,14 +18,15 @@ class EditProfileForm extends Component {
       error: '',
       isLoading: false,
       user: {
+        id: this.props.user.details.id,
         name: '',
         email: '',
-        password: '',
         image: '',
         description: '',
-        shipping: '',
-        availableDate: '',
-        history: {}
+        adress_line1: '',
+        address_line2: '',
+        city: '',
+        state: ''
       }
     }
   }
@@ -31,7 +34,6 @@ class EditProfileForm extends Component {
   onChange = (event) => {
     let user = this.state.user
     user[event.target.name] = event.target.value
-    console.log(event.target.value)
     this.setState({
       user
     })
@@ -41,39 +43,8 @@ class EditProfileForm extends Component {
     this.setState({
       isLoading: true
     })
-    console.log(this.state.user)
     this.props.editProfile(this.state.user)
   }
-    //this.props.messageShow('Signing you up, please wait...')
-
-  //   this.props.register(this.state.user)
-  //     .then(response => {
-  //       this.setState({
-  //         isLoading: false
-  //       })
-  //
-  //       if (response.data.errors && response.data.errors.length > 0) {
-  //         this.props.messageShow(response.data.errors[0].message)
-  //       } else {
-  //         this.props.messageShow('Signed up successfully.')
-  //
-  //         this.props.history.push(userRoutes.login.path)
-  //       }
-  //     })
-  //     .catch(error => {
-  //       this.props.messageShow('There was some error signing you up. Please try again.')
-  //
-  //       this.setState({
-  //         isLoading: false,
-  //         error: 'Error signing up.'
-  //       })
-  //     })
-  //     .then(() => {
-  //       window.setTimeout(() => {
-  //         this.props.messageHide()
-  //       }, 5000)
-  //     })
-  // }
 
   render() {
     return (
@@ -109,22 +80,21 @@ class EditProfileForm extends Component {
                 style={{ marginTop: '1em' }}
               />
 
-              {/* Password */}
-              <Input
-                type="password"
-                fullWidth={true}
-                placeholder="Password"
-                required="required"
-                name="password"
-                value={this.state.user.password}
-                onChange={this.onChange}
-                style={{ marginTop: '1em' }}
-              />
-
-              {/* Image */}
+              {/* Image
               <Input
                 type="file"
                 accept="image/*"
+                fullWidth={true}
+                placeholder="Image"
+                name="image"
+                value={this.state.user.image}
+                onChange={this.onChange}
+                style={{ marginTop: '1em' }}
+              /> */}
+
+              {/* image */}
+              <Input
+                type="text"
                 fullWidth={true}
                 placeholder="Image"
                 name="image"
@@ -148,24 +118,47 @@ class EditProfileForm extends Component {
               <Input
                 type="text"
                 fullWidth={true}
-                placeholder="Shipping Address"
+                placeholder="Address_line1"
                 required="required"
-                name="shipping"
-                value={this.state.user.shipping}
+                name="adress_line1"
+                value={this.state.user.adress_line1}
                 onChange={this.onChange}
                 style={{ marginTop: '1em' }}
               />
 
-              {/* Available Date ??? */}
               <Input
-                type="date"
+                type="text"
                 fullWidth={true}
-                placeholder="Available Date"
-                name="availableDate"
-                value={this.state.user.availableDate}
+                placeholder="Address_line2"
+                required={false}
+                name="address_line2"
+                value={this.state.user.address_line2}
+                onChange={this.onChange}
+                style={{ marginTop: '1em' }}
+              />  
+
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder="City"
+                required="required"
+                name="city"
+                value={this.state.user.city}
                 onChange={this.onChange}
                 style={{ marginTop: '1em' }}
               />
+
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder="State"
+                required="required"
+                name="state"
+                value={this.state.user.state}
+                onChange={this.onChange}
+                style={{ marginTop: '1em' }}
+              />
+ 
             </div>
 
             <div style={{ marginTop: '2em' }}>
@@ -191,4 +184,4 @@ function profileState(state) {
   }
 }
 
-export default connect(profileState, { logout, editProfile })(EditProfileForm)
+export default connect(profileState, { editProfile })(EditProfileForm)

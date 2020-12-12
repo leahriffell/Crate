@@ -111,6 +111,34 @@ describe('Reducers', () => {
          expect(newUserLogout).toEqual(expectedOutput)
     });
 
+    it('should return with an object if the type is === EDIT_PROFILE', () => {
+
+        const mockEditType = {
+            type: 'EDIT_PROFILE',
+            user: {
+             name: 'Hulk Hogan',
+             email: 'Hulkster@yahoo.com',
+             id: '2',
+             image: 'Seal-singing.jpg',
+             availableDate: "",
+             description: "",
+             history: {},
+             password: "hulkamania" 
+            } 
+        };
+
+        const expectedEditTypeOutput = {
+            error: null,
+            isLoading: false,
+            isAuthenticated: false,
+            details: null
+        };
+
+        const editType = reducers(mockDefaultState, mockEditType)
+
+        expect(editType).toEqual(expectedEditTypeOutput)
+    });
+
     it('should return the initial state if there is no action type that matches', () => {
 
         const mockNoType = {
@@ -122,7 +150,17 @@ describe('Reducers', () => {
             error: null,
             isLoading: false,
             isAuthenticated: false,
-            details: null
+            details: {
+                name: 'Hulk Hogan',
+                email: 'Hulkster@yahoo.com',
+                id: '2',
+                image: 'Seal-singing.jpg',
+                availableDate: "",
+                description: "",
+                history: {},
+                password: "hahaha",
+                shipping: ""
+            }
         };
 
         const noType = reducers(mockDefaultState, mockNoType)

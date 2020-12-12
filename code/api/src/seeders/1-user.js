@@ -16,12 +16,12 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         image: 'https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg',
+        description: "I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave",
         address_line1: '1234 There Blvd',
         address_line2: 'PO BOX 801234',
         city: 'Denver',
         state: 'CO',
-        zipcode: 36479,
-        description: "I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave"
+        zipcode: 36479
       },
       {
         id: 2,
@@ -32,11 +32,11 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         image: 'https://en.pimg.jp/045/948/028/1/45948028.jpg',
+        description: 'Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke',
         address_line1: '5678 Here Ave',
         city: 'Pueblo',
         state: 'CO',
-        zipcode: 85623,
-        description: 'Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke'
+        zipcode: 85623
       }
     ])
   },

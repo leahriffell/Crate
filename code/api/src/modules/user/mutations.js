@@ -22,6 +22,41 @@ export const userSignup = {
     password: {
       name: 'password',
       type: GraphQLString
+    },
+
+    image: {
+      name: 'image',
+      type: GraphQLString
+    },
+
+    description: {
+      name: 'description',
+      type: GraphQLString
+    },
+
+    address_line1: {
+      name: 'address_line1',
+      type: GraphQLString
+    },
+
+    address_line2: {
+      name: 'address_line2',
+      type: GraphQLString
+    },
+
+    city: {
+      name: 'city',
+      type: GraphQLString
+    },
+
+    state: {
+      name: 'state',
+      type: GraphQLString
+    },
+
+    zipcode: {
+      name: 'zipcode',
+      type: GraphQLInt
     }
   },
   resolve: create
@@ -59,47 +94,37 @@ export const userUpdate = {
     description: {
       name: 'description',
       type: GraphQLString
-    }, 
+    },
 
-    addressLine1: {
-      name: 'addressLine1', 
+    address_line1: {
+      name: 'address_line1',
       type: GraphQLString
-    }, 
+    },
 
-    addressLine2: {
-      name: 'addressLine2', 
+    address_line2: {
+      name: 'address_line2',
       type: GraphQLString
     },
 
     city: {
-      name: 'city', 
+      name: 'city',
       type: GraphQLString
     },
 
     state: {
-      name: 'state', 
+      name: 'state',
       type: GraphQLString
     },
 
     zipcode: {
-      name: 'zipcode', 
-      type: GraphQLString
-    },
-
-    availableDate: {
-      name: 'availableDate',
-      type: GraphQLString
-    },
-
-    history: {
-      name: 'history',
-      type: GraphQLString 
+      name: 'zipcode',
+      type: GraphQLInt
     }
   },
   resolve: update
 }
 
-// Remove
+// Remove user
 export const userRemove = {
   type: UserType,
   args: {

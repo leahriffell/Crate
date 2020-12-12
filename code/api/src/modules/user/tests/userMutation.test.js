@@ -28,7 +28,7 @@ describe('User mutations', () => {
       })
     );
     console.log("INFO - Server started.");
-  })
+  });
 
   beforeEach(async () => {
     // Assigned the dummy_user global variable to model creation (allows use outside this block from ln 20)
@@ -47,17 +47,17 @@ describe('User mutations', () => {
       zipcode: 11111
     });
     console.log("INFO - Dummy user created.");
-  })
+  });
 
   afterEach(async () => {
     await models.User.destroy({ where: {id: dummy_user.id} })
     console.log("INFO - Dummy user destroyed.");
-  })
+  });
 
   after(async () => {
     await connection.close;
     console.log("INFO - Connection to server stopped.");
-  })
+  });
 
   it('Update attributes for dummy user', async () => {
     const id =  dummy_user.id;
@@ -69,7 +69,7 @@ describe('User mutations', () => {
       });
 
     const mutated_user = user_mutation.body.data.userUpdate;
-    
+
     mutated_user.should.have.property('id')
     expect(mutated_user.id).to.eq(id)
 

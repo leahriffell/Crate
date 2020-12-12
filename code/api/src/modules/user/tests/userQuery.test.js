@@ -21,12 +21,12 @@ describe('User queries', () => {
       })
     );
     console.log("INFO - Server started.");
-  })
+  });
 
   after(async () => {
     await connection.close;
     console.log("INFO - Connection to server stopped.");
-  })
+  });
 
   it('gets information for specific user', async () => {
     const user_request = await request(server)
@@ -80,7 +80,7 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
-  })
+  });
 
   it('attempts a get request for specific user without any field', async () => {
     const bad_request = await request(server)
@@ -91,7 +91,7 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('Field "user" of type "user" must have a selection of subfields. Did you mean "user { ... }"?');
-  })
+  });
 
   it('attempts a get request for specific user without incorrect field request (attribute does not exist)', async () => {
     const bad_request = await request(server)
@@ -102,7 +102,7 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('Cannot query field "tacopizzacat" on type "user".');
-  })
+  });
 
   it('attempts a get request for specific user without specifying an id', async () => {
     const bad_request = await request(server)
@@ -113,7 +113,7 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('WHERE parameter "id" has invalid "undefined" value');
-  })
+  });
 
   // Should we be fixing the response to send a "no such user"? Right now, the getById resolver doesn't have an error pathway
   it('attempts a get request for specific user with incorrect id', async () => {
@@ -125,7 +125,7 @@ describe('User queries', () => {
     bad_request.body.data.should.have.property('user')
     bad_request.body.data.should.not.have.nested.property('email')
     expect(bad_request.body.data.user).to.eq(null);
-  })
+  });
 
   it('gets information for all users', async () => {
     const all_users_request = await request(server)
@@ -180,7 +180,7 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
-  })
+  });
 
   it('attempts a get request for all users without any fields', async () => {
     const bad_request = await request(server)
@@ -191,7 +191,7 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('Field "users" of type "[user]" must have a selection of subfields. Did you mean "users { ... }"?');
-  })
+  });
 
   it('attempts a get request for all users with incorrect field request (attribute does not exist)', async () => {
     const bad_request = await request(server)
@@ -202,7 +202,7 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('Cannot query field "birthday" on type "user".');
-  })
+  });
 
   // If you accidentally use 'user' instead of 'users'
   it('attempts a get request for all users with incorrect query', async () => {
@@ -218,7 +218,7 @@ describe('User queries', () => {
     bad_request.body.data.should.not.have.nested.property('email')
 
     expect(bad_request.body.data.user).to.eq(null);
-  })
+  });
 
   it('gets information on genders', async () => {
     const gender_request = await request(server)
@@ -232,7 +232,7 @@ describe('User queries', () => {
     const female = gender_request.body.data.userGenders.find(gender => {return gender.id === 2});
     expect(female.id).to.eq(2)
     expect(female.name).to.eq('Female');
-  })
+  });
 
   it('attempts query for genders without response request', async () => {
     const bad_request = await request(server)
@@ -243,7 +243,7 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
-  })
+  });
 
   it('attempts query for genders typo in query function', async () => {
     const bad_request = await request(server)
@@ -254,5 +254,81 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('Cannot query field "userGender" on type "query". Did you mean "userGenders"?');
-  })
+  });
+
+  it('logs in a user', async () => {
+    const user_request = await request(server)
+      .post('/')
+      .send({ query: '{ userLogin(email: "user@crate.com", password: "123456", role: "USER") { user {id name email password role image address_line1 address_line2 city state zipcode description} token } }'});
+
+    expect(user_request.statusCode).to.equal(200)
+
+    user_request.body.data.userLogin.should.have.property('token')
+
+    user_request.body.data.userLogin.user.should.have.property('id')
+    expect(user_request.body.data.userLogin.user.id).to.eq(2)
+
+    user_request.body.data.userLogin.user.should.have.property('name')
+    expect(user_request.body.data.userLogin.user.name).to.eq('The User')
+
+    user_request.body.data.userLogin.user.should.have.property('email')
+    expect(user_request.body.data.userLogin.user.email).to.eq('user@crate.com')
+
+    user_request.body.data.userLogin.user.should.have.property('password')
+    expect(user_request.body.data.userLogin.user.password).to.eq('$2b$10$wJdtPJOi4TV/9rgWcE4TUuNwrZ6Iyy1/ez78Itis2nmSYNTIEO7zm') // Does this hash change everytime locals change? If so, what is a better way to test this?
+
+    user_request.body.data.userLogin.user.should.have.property('role')
+    expect(user_request.body.data.userLogin.user.role).to.eq('USER')
+
+    user_request.body.data.userLogin.user.should.have.property('image')
+    expect(user_request.body.data.userLogin.user.image).to.eq('https://en.pimg.jp/045/948/028/1/45948028.jpg')
+
+    user_request.body.data.userLogin.user.should.have.property('address_line1')
+    expect(user_request.body.data.userLogin.user.address_line1).to.eq('5678 Here Ave')
+
+    user_request.body.data.userLogin.user.should.have.property('city')
+    expect(user_request.body.data.userLogin.user.city).to.eq('Pueblo')
+
+    user_request.body.data.userLogin.user.should.have.property('state')
+    expect(user_request.body.data.userLogin.user.state).to.eq('CO')
+
+    user_request.body.data.userLogin.user.should.have.property('zipcode')
+    expect(user_request.body.data.userLogin.user.zipcode).to.eq(85623)
+
+    user_request.body.data.userLogin.user.should.have.property('description')
+    expect(user_request.body.data.userLogin.user.description).to.eq('Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke')
+  });
+
+  it('attempts to log in user without passing in login information', async () => {
+    const bad_request = await request(server)
+      .post('/')
+      .send({ query: '{ userLogin { } }' });
+    expect(bad_request.status).to.eq(400);
+    bad_request.body.should.have.property('errors')
+    bad_request.body.errors[0].should.have.property('message')
+    bad_request.body.errors[0].message.should.be.a('string');
+    expect(bad_request.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
+  });
+
+  it('attempts to log in user with incorrect password', async () => {
+    const bad_request = await request(server)
+      .post('/')
+      .send({ query: '{ userLogin(email: "user@crate.com", password: "111111", role: "USER") { user {id} token } }'});
+    expect(bad_request.status).to.eq(200);
+    bad_request.body.should.have.property('errors')
+    bad_request.body.errors[0].should.have.property('message')
+    bad_request.body.errors[0].message.should.be.a('string');
+    expect(bad_request.body.errors[0].message).to.eq('Sorry, the password you entered is incorrect. Please try again.');
+  });
+
+  it('attempts to log in user with incorrect email', async () => {
+    const bad_request = await request(server)
+      .post('/')
+      .send({ query: '{ userLogin(email: "baduser@crate.com", password: "123456", role: "USER") { user {id} token } }'});
+    expect(bad_request.status).to.eq(200);
+    bad_request.body.should.have.property('errors')
+    bad_request.body.errors[0].should.have.property('message')
+    bad_request.body.errors[0].message.should.be.a('string');
+    expect(bad_request.body.errors[0].message).to.eq('We do not have any user registered with baduser@crate.com email address. Please signup.');
+  });
 });

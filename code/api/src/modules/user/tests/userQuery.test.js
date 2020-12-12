@@ -197,4 +197,48 @@ describe('User queries', () => {
 
     expect(bad_request.body.data.user).to.eq(null);
   })
+
+  it('logs in a user', async () => {
+    const user_request = await request(server)
+      .post('/')
+      .send({ query: '{ userLogin(email: "user@crate.com", password: "123456", role: "USER") { user {id name email password role image address_line1 address_line2 city state zipcode description} token } }'});
+
+    expect(user_request.statusCode).to.equal(200)
+
+    user_request.body.data.userLogin.should.have.property('token')
+
+    user_request.body.data.userLogin.user.should.have.property('id')
+    expect(user_request.body.data.userLogin.user.id).to.eq(2)
+
+    user_request.body.data.userLogin.user.should.have.property('name')
+    expect(user_request.body.data.userLogin.user.name).to.eq('The User')
+
+    user_request.body.data.userLogin.user.should.have.property('email')
+    expect(user_request.body.data.userLogin.user.email).to.eq('user@crate.com')
+
+    user_request.body.data.userLogin.user.should.have.property('password')
+    expect(user_request.body.data.userLogin.user.password).to.eq('$2b$10$pTdwV6spenCVU/iga.o36Ox0.8tFyBcHFW59HSffEkN9TVcyE3H62')
+
+    user_request.body.data.userLogin.user.should.have.property('role')
+    expect(user_request.body.data.userLogin.user.role).to.eq('USER')
+
+    user_request.body.data.userLogin.user.should.have.property('image')
+    expect(user_request.body.data.userLogin.user.image).to.eq('https://en.pimg.jp/045/948/028/1/45948028.jpg')
+
+    user_request.body.data.userLogin.user.should.have.property('address_line1')
+    expect(user_request.body.data.userLogin.user.address_line1).to.eq('5678 Here Ave')
+
+    user_request.body.data.userLogin.user.should.have.property('city')
+    expect(user_request.body.data.userLogin.user.city).to.eq('Pueblo')
+
+    user_request.body.data.userLogin.user.should.have.property('state')
+    expect(user_request.body.data.userLogin.user.state).to.eq('CO')
+
+    user_request.body.data.userLogin.user.should.have.property('zipcode')
+    expect(user_request.body.data.userLogin.user.zipcode).to.eq(85623)
+
+    user_request.body.data.userLogin.user.should.have.property('description')
+    expect(user_request.body.data.userLogin.user.description).to.eq('Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke')
+  });
 });
+

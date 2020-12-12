@@ -241,7 +241,7 @@ describe('User queries', () => {
     expect(user_request.body.data.userLogin.user.description).to.eq('Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke')
   });
 
-  it('attempts to log in user without passing any response requests', async () => {
+  it('attempts to log in user without passing in login information', async () => {
     const bad_request = await request(server)
       .post('/')
       .send({ query: '{ userLogin { } }' });
@@ -250,6 +250,28 @@ describe('User queries', () => {
     bad_request.body.errors[0].should.have.property('message')
     bad_request.body.errors[0].message.should.be.a('string');
     expect(bad_request.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
+  });
+
+  it('attempts to log in user with incorrect password', async () => {
+    const bad_request = await request(server)
+      .post('/')
+      .send({ query: '{ userLogin(email: "user@crate.com", password: "111111", role: "USER") { user {id} token } }'});
+    expect(bad_request.status).to.eq(200);
+    bad_request.body.should.have.property('errors')
+    bad_request.body.errors[0].should.have.property('message')
+    bad_request.body.errors[0].message.should.be.a('string');
+    expect(bad_request.body.errors[0].message).to.eq('Sorry, the password you entered is incorrect. Please try again.');
+  });
+
+  it('attempts to log in user with incorrect email', async () => {
+    const bad_request = await request(server)
+      .post('/')
+      .send({ query: '{ userLogin(email: "baduser@crate.com", password: "123456", role: "USER") { user {id} token } }'});
+    expect(bad_request.status).to.eq(200);
+    bad_request.body.should.have.property('errors')
+    bad_request.body.errors[0].should.have.property('message')
+    bad_request.body.errors[0].message.should.be.a('string');
+    expect(bad_request.body.errors[0].message).to.eq('We do not have any user registered with baduser@crate.com email address. Please signup.');
   });
 });
 

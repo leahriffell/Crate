@@ -16,6 +16,7 @@ class EditProfileForm extends Component {
       error: '',
       isLoading: false,
       user: {
+        id: this.props.user.details.id,
         name: '',
         email: '',
         password: '',
@@ -31,7 +32,6 @@ class EditProfileForm extends Component {
   onChange = (event) => {
     let user = this.state.user
     user[event.target.name] = event.target.value
-    console.log(event.target.value)
     this.setState({
       user
     })
@@ -191,4 +191,4 @@ function profileState(state) {
   }
 }
 
-export default connect(profileState, { logout, editProfile })(EditProfileForm)
+export default connect(profileState, { editProfile })(EditProfileForm)

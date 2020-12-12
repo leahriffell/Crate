@@ -34,7 +34,7 @@ class Signup extends Component {
       user: {
         name: '',
         email: '',
-        password: '',
+        password: ''
       }
     }
   }
@@ -70,6 +70,10 @@ class Signup extends Component {
           this.props.messageShow('Signed up successfully.')
 
           this.props.history.push(userRoutes.login.path)
+
+          this.setState({
+            id: this.props.user.id
+          })
         }
       })
       .catch(error => {

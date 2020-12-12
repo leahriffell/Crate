@@ -8,14 +8,17 @@ import { upload } from '../common/api/actions'
 class ProfilePicture extends Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.state = {
       image: '',
+      id: ''
     }
   }
 
   componentDidMount(props) {
-    this.setState({ image: this.props.user.details.image})
+    this.setState({ 
+      image: this.props.user.details.image,
+      id: this.props.user.details.id
+    })
   }
 
   render(props) {

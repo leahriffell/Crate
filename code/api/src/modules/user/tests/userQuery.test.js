@@ -240,5 +240,16 @@ describe('User queries', () => {
     user_request.body.data.userLogin.user.should.have.property('description')
     expect(user_request.body.data.userLogin.user.description).to.eq('Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke')
   });
+
+  it('attempts to log in user without passing any response requests', async () => {
+    const bad_request = await request(server)
+      .post('/')
+      .send({ query: '{ userLogin { } }' });
+    expect(bad_request.status).to.eq(400);
+    bad_request.body.should.have.property('errors')
+    bad_request.body.errors[0].should.have.property('message')
+    bad_request.body.errors[0].message.should.be.a('string');
+    expect(bad_request.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
+  });
 });
 

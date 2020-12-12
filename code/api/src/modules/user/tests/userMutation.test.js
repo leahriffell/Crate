@@ -67,7 +67,9 @@ describe('User mutations', () => {
         query:
           `mutation { userUpdate(id: ${id}, name: "NEW NAME", email: "EMAIL@EMAIL.COM", password: "123456", image: "updated_img.png", description: "new day, new me", address_line1: "NEW ADDRESS LINE 1", address_line2: "NEW ADDRESS LINE 2", city: "NEW CITY", state: "AA", zipcode: 11111 ) { id name email password image description address_line1 address_line2 city state zipcode } }`
       });
+
     const mutated_user = user_mutation.body.data.userUpdate;
+    
     mutated_user.should.have.property('id')
     expect(mutated_user.id).to.eq(id)
 

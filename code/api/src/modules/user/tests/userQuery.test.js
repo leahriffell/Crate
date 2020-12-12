@@ -32,9 +32,10 @@ describe('User queries', () => {
     const user_request = await request(server)
       .post('/')
       .send({ query: '{ user(id: 2) { id name email password image description address_line1 address_line2 city state zipcode } }'});
-    const user = user_request.body.data.user;
 
     expect(user_request.status).to.equal(200)
+
+    const user = user_request.body.data.user;
 
     user.should.have.property('id')
     expect(user.id).to.eq(2)
@@ -130,10 +131,11 @@ describe('User queries', () => {
     const all_users_request = await request(server)
       .post('/')
       .send({ query: '{ users { id name email password image description address_line1 address_line2 city state zipcode } }'});
-    const admin = all_users_request.body.data.users.find(user => {return user.id === 1});
 
     expect(all_users_request.status).to.equal(200)
     all_users_request.body.data.users.should.be.a('array')
+
+    const admin = all_users_request.body.data.users.find(user => {return user.id === 1});
 
     admin.should.have.property('id')
     expect(admin.id).to.eq(1)
@@ -216,5 +218,41 @@ describe('User queries', () => {
     bad_request.body.data.should.not.have.nested.property('email')
 
     expect(bad_request.body.data.user).to.eq(null);
+  })
+
+  it('gets information on genders', async () => {
+    const gender_request = await request(server)
+      .post('/')
+      .send({ query: '{ userGenders { id name } }' });
+    expect(gender_request.status).to.eq(200);
+
+    const male = gender_request.body.data.userGenders.find(gender => {return gender.id === 1});
+    expect(male.id).to.eq(1)
+    expect(male.name).to.eq('Male')
+    const female = gender_request.body.data.userGenders.find(gender => {return gender.id === 2});
+    expect(female.id).to.eq(2)
+    expect(female.name).to.eq('Female');
+  })
+
+  it('attempts query for genders without response request', async () => {
+    const bad_request = await request(server)
+      .post('/')
+      .send({ query: '{ userGenders { } }' });
+    expect(bad_request.status).to.eq(400);
+    bad_request.body.should.have.property('errors')
+    bad_request.body.errors[0].should.have.property('message')
+    bad_request.body.errors[0].message.should.be.a('string');
+    expect(bad_request.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
+  })
+
+  it('attempts query for genders typo in query function', async () => {
+    const bad_request = await request(server)
+      .post('/')
+      .send({ query: '{ userGender { id name } }' });
+    expect(bad_request.status).to.eq(400);
+    bad_request.body.should.have.property('errors')
+    bad_request.body.errors[0].should.have.property('message')
+    bad_request.body.errors[0].message.should.be.a('string');
+    expect(bad_request.body.errors[0].message).to.eq('Cannot query field "userGender" on type "query". Did you mean "userGenders"?');
   })
 });

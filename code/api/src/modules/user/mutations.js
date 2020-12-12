@@ -1,5 +1,5 @@
 // Imports
-import { GraphQLString, GraphQLInt } from 'graphql'
+import { GraphQLString, GraphQLInt, GraphQLObjectType } from 'graphql'
 
 // App Imports
 import { UserType } from './types'
@@ -36,6 +36,21 @@ export const userUpdate = {
       type: GraphQLInt
     },
 
+    name: {
+      name: 'name',
+      type: GraphQLString
+    },
+
+    email: {
+      name: 'email',
+      type: GraphQLString
+    },
+
+    password: {
+      name: 'password',
+      type: GraphQLString
+    },
+
     image: {
       name: 'image',
       type: GraphQLString
@@ -44,6 +59,41 @@ export const userUpdate = {
     description: {
       name: 'description',
       type: GraphQLString
+    }, 
+
+    addressLine1: {
+      name: 'addressLine1', 
+      type: GraphQLString
+    }, 
+
+    addressLine2: {
+      name: 'addressLine2', 
+      type: GraphQLString
+    },
+
+    city: {
+      name: 'city', 
+      type: GraphQLString
+    },
+
+    state: {
+      name: 'state', 
+      type: GraphQLString
+    },
+
+    zipcode: {
+      name: 'zipcode', 
+      type: GraphQLString
+    },
+
+    availableDate: {
+      name: 'availableDate',
+      type: GraphQLString
+    },
+
+    history: {
+      name: 'history',
+      type: GraphQLString 
     }
   },
   resolve: update

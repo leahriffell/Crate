@@ -81,13 +81,11 @@ export async function login(parentValue, { email, password }) {
         role: userDetails.role,
         image: userDetails.image, 
         description: userDetails.description, 
-        addressLine1: userDetails.addressLine1,
-        addressLine2: userDetails.addressLine2, 
+        address_line1: userDetails.address_line1,
+        address_line2: userDetails.address_line2, 
         city: userDetails.city,
         state: userDetails.state,
-        zipcode: userDetails.zipcode,
-        availableDate: userDetails.userDetails, 
-        history: userDetails.history
+        zipcode: userDetails.zipcode
       }
 
       return {

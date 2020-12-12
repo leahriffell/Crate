@@ -31,33 +31,43 @@ describe('User queries', () => {
   it('gets information for specific user', async () => {
     const user_request = await request(server)
       .post('/')
-      .send({ query: '{ user(id: 2) { image email description address_line1 address_line2 city state zipcode } }'});
+      .send({ query: '{ user(id: 2) { id name email password image description address_line1 address_line2 city state zipcode } }'});
+    const user = user_request.body.data.user;
 
-    expect(user_request.statusCode).to.equal(200)
+    expect(user_request.status).to.equal(200)
 
-    user_request.body.data.user.should.have.property('image')
-    expect(user_request.body.data.user.image).to.eq('https://en.pimg.jp/045/948/028/1/45948028.jpg')
+    user.should.have.property('id')
+    expect(user.id).to.eq(2)
 
-    user_request.body.data.user.should.have.property('email')
-    expect(user_request.body.data.user.email).to.eq('user@crate.com')
+    user.should.have.property('name')
+    expect(user.name).to.eq('The User')
 
-    user_request.body.data.user.should.have.property('description')
-    expect(user_request.body.data.user.description).to.eq('Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke')
+    user.should.have.property('email')
+    expect(user.email).to.eq('user@crate.com')
 
-    user_request.body.data.user.should.have.property('address_line1')
-    expect(user_request.body.data.user.address_line1).to.eq('5678 Here Ave')
+    user.should.have.property('password')
+    expect(user.password).to.eq('$2b$10$wJdtPJOi4TV/9rgWcE4TUuNwrZ6Iyy1/ez78Itis2nmSYNTIEO7zm')
 
-    user_request.body.data.user.should.have.property('address_line2')
-    expect(user_request.body.data.user.address_line2).to.eq(null)
+    user.should.have.property('image')
+    expect(user.image).to.eq('https://en.pimg.jp/045/948/028/1/45948028.jpg')
 
-    user_request.body.data.user.should.have.property('city')
-    expect(user_request.body.data.user.city).to.eq('Pueblo')
+    user.should.have.property('description')
+    expect(user.description).to.eq('Tattooed seitan waistcoat austin asymmetrical chambray hot chicken man bun poke')
 
-    user_request.body.data.user.should.have.property('state')
-    expect(user_request.body.data.user.state).to.eq('CO')
+    user.should.have.property('address_line1')
+    expect(user.address_line1).to.eq('5678 Here Ave')
 
-    user_request.body.data.user.should.have.property('zipcode')
-    expect(user_request.body.data.user.zipcode).to.eq(85623);
+    user.should.have.property('address_line2')
+    expect(user.address_line2).to.eq(null)
+
+    user.should.have.property('city')
+    expect(user.city).to.eq('Pueblo')
+
+    user.should.have.property('state')
+    expect(user.state).to.eq('CO')
+
+    user.should.have.property('zipcode')
+    expect(user.zipcode).to.eq(85623);
   });
 
   it('attempts a get request for specific user without response request', async () => {
@@ -119,34 +129,44 @@ describe('User queries', () => {
   it('gets information for all users', async () => {
     const all_users_request = await request(server)
       .post('/')
-      .send({ query: '{ users { image email description address_line1 address_line2 city state zipcode } }'});
+      .send({ query: '{ users { id name email password image description address_line1 address_line2 city state zipcode } }'});
+    const admin = all_users_request.body.data.users.find(user => {return user.id === 1});
 
-    expect(all_users_request.statusCode).to.equal(200)
+    expect(all_users_request.status).to.equal(200)
     all_users_request.body.data.users.should.be.a('array')
 
-    all_users_request.body.data.users[0].should.have.property('image')
-    expect(all_users_request.body.data.users[0].image).to.eq('https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg')
+    admin.should.have.property('id')
+    expect(admin.id).to.eq(1)
 
-    all_users_request.body.data.users[0].should.have.property('email')
-    expect(all_users_request.body.data.users[0].email).to.eq('admin@crate.com')
+    admin.should.have.property('name')
+    expect(admin.name).to.eq('The Admin')
 
-    all_users_request.body.data.users[0].should.have.property('description')
-    expect(all_users_request.body.data.users[0].description).to.eq("I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave")
+    admin.should.have.property('email')
+    expect(admin.email).to.eq('admin@crate.com')
 
-    all_users_request.body.data.users[0].should.have.property('address_line1')
-    expect(all_users_request.body.data.users[0].address_line1).to.eq('1234 There Blvd')
+    admin.should.have.property('password')
+    expect(admin.password).to.eq('$2b$10$ETqxtrm6FpBsxMcET.Qor.pw9X.5FPj6/1QF9jRY3EJ4G7kNNFz1e')
 
-    all_users_request.body.data.users[0].should.have.property('address_line2')
-    expect(all_users_request.body.data.users[0].address_line2).to.eq('PO BOX 801234')
+    admin.should.have.property('image')
+    expect(admin.image).to.eq('https://do.lolwot.com/wp-content/uploads/2015/06/18-hilarious-and-bizarre-stock-photos-15.jpg')
 
-    all_users_request.body.data.users[0].should.have.property('city')
-    expect(all_users_request.body.data.users[0].city).to.eq('Denver')
+    admin.should.have.property('description')
+    expect(admin.description).to.eq("I'm baby meggings church-key neutra, coloring book kitsch banh mi slow-carb pop-up irony snackwave")
 
-    all_users_request.body.data.users[0].should.have.property('state')
-    expect(all_users_request.body.data.users[0].state).to.eq('CO')
+    admin.should.have.property('address_line1')
+    expect(admin.address_line1).to.eq('1234 There Blvd')
 
-    all_users_request.body.data.users[0].should.have.property('zipcode')
-    expect(all_users_request.body.data.users[0].zipcode).to.eq(36479);
+    admin.should.have.property('address_line2')
+    expect(admin.address_line2).to.eq('PO BOX 801234')
+
+    admin.should.have.property('city')
+    expect(admin.city).to.eq('Denver')
+
+    admin.should.have.property('state')
+    expect(admin.state).to.eq('CO')
+
+    admin.should.have.property('zipcode')
+    expect(admin.zipcode).to.eq(36479);
   });
 
   it('attempts a get request for all users without response request', async () => {

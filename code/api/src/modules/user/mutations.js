@@ -71,6 +71,21 @@ export const userUpdate = {
       type: GraphQLInt
     },
 
+    name: {
+      name: 'name',
+      type: GraphQLString
+    },
+
+    email: {
+      name: 'email',
+      type: GraphQLString
+    },
+
+    password: {
+      name: 'password',
+      type: GraphQLString
+    },
+
     image: {
       name: 'image',
       type: GraphQLString
@@ -104,11 +119,6 @@ export const userUpdate = {
     zipcode: {
       name: 'zipcode',
       type: GraphQLInt
-    },
-
-    email: {
-      name: 'email',
-      type: GraphQLString
     }
   },
   resolve: update

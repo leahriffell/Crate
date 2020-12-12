@@ -123,8 +123,7 @@ describe('Reducers', () => {
              availableDate: "",
              description: "",
              history: {},
-             password: "hahaha",
-             shipping: ""
+             password: "hulkamania" 
             } 
         };
 

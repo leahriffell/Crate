@@ -15,7 +15,7 @@ import { grey, grey2 } from '../../ui/common/colors'
 
 // App Imports
 import userRoutes from '../../setup/routes/user'
-import { logout } from './api/actions'
+import { logout, getUserData } from './api/actions'
 
 // Component
 

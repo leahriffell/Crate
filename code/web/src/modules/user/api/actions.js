@@ -12,6 +12,7 @@ export const LOGIN_RESPONSE = 'AUTH/LOGIN_RESPONSE'
 export const SET_USER = 'AUTH/SET_USER'
 export const LOGOUT = 'AUTH/LOGOUT'
 export const EDIT_PROFILE = 'EDIT_PROFILE'
+export const GET_USER = 'GET_USER'
 
 
 // Actions
@@ -37,7 +38,7 @@ export function login(userCredentials, isLoading = true) {
     return axios.post(routeApi, query({
       operation: 'userLogin',
       variables: userCredentials,
-      fields: ['user {id, name, email, role, image}', 'token']
+      fields: ['user {id, name, email, role, image, description}', 'token']
     }))
       .then(response => {
         let error = ''
@@ -85,7 +86,6 @@ export function register(userDetails) {
 }
 
 export function editProfile(user) {
-  console.log(user, 'fuck')
   return dispatch => {
     dispatch({
       type: EDIT_PROFILE,
@@ -94,25 +94,37 @@ export function editProfile(user) {
     return axios.post(routeApi, mutation({
       operation: 'userUpdate',
       variables: {
-        id: user.id, 
+        id: user.id,
         name: user.name,
         email: user.email,
-        description: user.description,
         image: user.image,
-        addressLine1: user.addressLine1,
-        addressLine2: user.addressLine2, 
-        city: user.city,
-        state: user.state,
-        zipCode: user.zipCode,
-        availableDate: user.availableDate,
-        history: user.history
+        description: user.description
       },
-      fields: ['user {id, name, email, image, description, addressLine1, addressLine2, city, state, zipcode, availableDate, history}']
+      fields: ['id, name, email, image, description']
     }))
-     .then(response => console.log(response, "these ARE the droids you're looking for"))
-     .catch(error => {
-       console.log(error)
+     .then(response => {
+       const user = response.data.data.userUpdate
+       getUserData(user)
      })
+  }
+}
+
+export function getUserData(user) {
+  return dispatch => {
+    dispatch({ 
+      type: GET_USER,
+      user
+    })
+    return axios.post(routeApi, query({
+      operation: 'user',
+      variables: {
+        id: user.id
+      },
+      fields: ['id, name, email, image, description']
+    }))
+     .then(response => {
+       console.log(response)
+    })
   }
 }
 

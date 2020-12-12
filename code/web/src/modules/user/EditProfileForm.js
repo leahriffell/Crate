@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { logout, editProfile } from './api/actions'
+import { editProfile } from './api/actions'
 import { Grid, GridCell } from '../../ui/grid'
 import { Helmet } from 'react-helmet'
 import { Link, withRouter } from 'react-router-dom'
@@ -23,13 +23,10 @@ class EditProfileForm extends Component {
         email: '',
         image: '',
         description: '',
-        adressLine1: '',
-        addressLine2: '',
+        adress_line1: '',
+        address_line2: '',
         city: '',
-        state: '',
-        zipcode: '',
-        availableDate: '',
-        history: {}
+        state: ''
       }
     }
   }
@@ -48,45 +45,6 @@ class EditProfileForm extends Component {
     })
     this.props.editProfile(this.state.user)
   }
-
-  // changeImagePath = (event) => {
-  //   let user = this.state.user
-  //   user.image = event.target.value
-  //   user.image.replace("C:\\fakepath\\", '')
-  //   this.setState({
-  //     user
-  //   })
-  // }
-    //this.props.messageShow('Signing you up, please wait...')
-
-  //   this.props.register(this.state.user)
-  //     .then(response => {
-  //       this.setState({
-  //         isLoading: false
-  //       })
-  //
-  //       if (response.data.errors && response.data.errors.length > 0) {
-  //         this.props.messageShow(response.data.errors[0].message)
-  //       } else {
-  //         this.props.messageShow('Signed up successfully.')
-  //
-  //         this.props.history.push(userRoutes.login.path)
-  //       }
-  //     })
-  //     .catch(error => {
-  //       this.props.messageShow('There was some error signing you up. Please try again.')
-  //
-  //       this.setState({
-  //         isLoading: false,
-  //         error: 'Error signing up.'
-  //       })
-  //     })
-  //     .then(() => {
-  //       window.setTimeout(() => {
-  //         this.props.messageHide()
-  //       }, 5000)
-  //     })
-  // }
 
   render() {
     return (
@@ -160,10 +118,10 @@ class EditProfileForm extends Component {
               <Input
                 type="text"
                 fullWidth={true}
-                placeholder="Address_Line1"
+                placeholder="Address_line1"
                 required="required"
-                name="adressLine1"
-                value={this.state.user.adressLine1}
+                name="adress_line1"
+                value={this.state.user.adress_line1}
                 onChange={this.onChange}
                 style={{ marginTop: '1em' }}
               />
@@ -171,10 +129,10 @@ class EditProfileForm extends Component {
               <Input
                 type="text"
                 fullWidth={true}
-                placeholder="Address_Line2"
+                placeholder="Address_line2"
                 required={false}
-                name="addressLine2"
-                value={this.state.user.addressLine2}
+                name="address_line2"
+                value={this.state.user.address_line2}
                 onChange={this.onChange}
                 style={{ marginTop: '1em' }}
               />  
@@ -200,28 +158,7 @@ class EditProfileForm extends Component {
                 onChange={this.onChange}
                 style={{ marginTop: '1em' }}
               />
-
-              <Input
-                type="text"
-                fullWidth={true}
-                placeholder="Zipcode"
-                required="required"
-                name="zipcode"
-                value={this.state.user.zipcode}
-                onChange={this.onChange}
-                style={{ marginTop: '1em' }}
-              />
-
-              {/* Available Date ??? */}
-              <Input
-                type="date"
-                fullWidth={true}
-                placeholder="Available Date"
-                name="availableDate"
-                value={this.state.user.availableDate}
-                onChange={this.onChange}
-                style={{ marginTop: '1em' }}
-              />
+ 
             </div>
 
             <div style={{ marginTop: '2em' }}>

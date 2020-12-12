@@ -104,7 +104,7 @@ describe('User mutations', () => {
     expect(mutated_user.zipcode).to.eq(11111)
 
     // Tests that the database itself was updated
-    const database_update = await models.User.findByPk(id) //findByPk = rails find (id) VS findOne = rails find_by (any attribute)
+    const database_update = await models.User.findByPk(id); //findByPk = rails find (id) VS findOne = rails find_by (any attribute)
     expect(database_update.id).to.eq(id)
     expect(database_update.name).to.eq('NEW NAME')
     expect(database_update.email).to.eq('EMAIL@EMAIL.COM')
@@ -132,4 +132,37 @@ describe('User mutations', () => {
     bad_mutation.body.errors[0].message.should.be.a('string');
     expect(bad_mutation.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
   });
+
+  it('Can delete a user from the database', async () => {
+    const id = dummy_user.id;
+    const delete_user = await request(server)
+      .post('/')
+      .send({
+        query:
+          `mutation { userRemove(id: ${id}) {id name email } }`
+      });
+    expect(delete_user.status).to.eq(200);
+    const deletion_response = delete_user.body.data.userRemove;
+    expect(deletion_response.id).to.eq(null)
+    expect(deletion_response.name).to.eq(null)
+    expect(deletion_response.email).to.eq(null);
+
+    const database_check = await models.User.findByPk(id);
+    expect(database_check).to.eq(null);
+  })
+
+  it('attempts to delete a user from the database without response request', async () => {
+    const id = dummy_user.id;
+    const bad_request = await request(server)
+      .post('/')
+      .send({
+        query:
+          `mutation { userRemove(id: ${id}) {} }`
+      });
+    expect(bad_request.status).to.eq(400);
+    bad_request.body.should.have.property('errors')
+    bad_request.body.errors[0].should.have.property('message')
+    bad_request.body.errors[0].message.should.be.a('string');
+    expect(bad_request.body.errors[0].message).to.eq('Syntax Error: Expected Name, found }');
+  })
 });

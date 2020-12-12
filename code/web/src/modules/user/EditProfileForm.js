@@ -21,14 +21,13 @@ class EditProfileForm extends Component {
         id: this.props.user.details.id,
         name: '',
         email: '',
-        password: '',
         image: '',
         description: '',
         adressLine1: '',
         addressLine2: '',
         city: '',
         state: '',
-        zipCode: 0,
+        zipcode: '',
         availableDate: '',
         history: {}
       }
@@ -123,18 +122,6 @@ class EditProfileForm extends Component {
                 style={{ marginTop: '1em' }}
               />
 
-              {/* Password */}
-              <Input
-                type="password"
-                fullWidth={true}
-                placeholder="Password"
-                required="required"
-                name="password"
-                value={this.state.user.password}
-                onChange={this.onChange}
-                style={{ marginTop: '1em' }}
-              />
-
               {/* Image
               <Input
                 type="file"
@@ -185,7 +172,7 @@ class EditProfileForm extends Component {
                 type="text"
                 fullWidth={true}
                 placeholder="Address_Line2"
-                required='false'
+                required={false}
                 name="addressLine2"
                 value={this.state.user.addressLine2}
                 onChange={this.onChange}
@@ -219,8 +206,8 @@ class EditProfileForm extends Component {
                 fullWidth={true}
                 placeholder="Zipcode"
                 required="required"
-                name="zipCode"
-                value={this.state.user.zipCode}
+                name="zipcode"
+                value={this.state.user.zipcode}
                 onChange={this.onChange}
                 style={{ marginTop: '1em' }}
               />

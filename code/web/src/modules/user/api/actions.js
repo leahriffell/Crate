@@ -96,19 +96,20 @@ export function editProfile(user) {
       variables: {
         id: user.id, 
         name: user.name,
-        email: user.email, 
-        password: user.password,
+        email: user.email,
         description: user.description,
         image: user.image,
-        shipping: user.shipping,
+        addressLine1: user.addressLine1,
+        addressLine2: user.addressLine2, 
+        city: user.city,
+        state: user.state,
+        zipCode: user.zipCode,
         availableDate: user.availableDate,
         history: user.history
       },
-      fields: ['user {id, name, email, password, image, description, shipping, availableDate, history}']
+      fields: ['user {id, name, email, image, description, addressLine1, addressLine2, city, state, zipcode, availableDate, history}']
     }))
-     .then(response => {
-       console.log(response, "these ARE the droids you're looking for")
-     })
+     .then(response => console.log(response, "these ARE the droids you're looking for"))
      .catch(error => {
        console.log(error)
      })

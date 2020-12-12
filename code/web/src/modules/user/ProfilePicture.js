@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { logout } from './api/actions'
-import { upload } from '../common/api/actions'
+// import { upload } from '../common/api/actions';
+import { login } from './api/actions'
+import profileImage from '../../setup/routes/user'
 
 
 class ProfilePicture extends Component {
@@ -25,7 +26,7 @@ class ProfilePicture extends Component {
 
       return (
         <div>
-          <img src={this.state.image} />
+          <img src={ this.state.image } />
         </div>
       )
   }
@@ -39,4 +40,4 @@ function profileState(state) {
 
 
 
-export default connect(profileState, { upload })(ProfilePicture)
+export default connect(profileState, { login })(ProfilePicture)

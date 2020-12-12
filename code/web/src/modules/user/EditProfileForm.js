@@ -8,6 +8,8 @@ import { Link, withRouter } from 'react-router-dom'
 import Input from '../../ui/input/Input'
 import userRoutes from '../../setup/routes/user'
 import Button from '../../ui/button'
+import profileImage from '../../setup/routes/user'
+
 
 class EditProfileForm extends Component {
   constructor(props) {
@@ -22,7 +24,11 @@ class EditProfileForm extends Component {
         password: '',
         image: '',
         description: '',
-        shipping: '',
+        adressLine1: '',
+        addressLine2: '',
+        city: '',
+        state: '',
+        zipCode: 0,
         availableDate: '',
         history: {}
       }
@@ -41,9 +47,17 @@ class EditProfileForm extends Component {
     this.setState({
       isLoading: true
     })
-    console.log(this.state.user)
     this.props.editProfile(this.state.user)
   }
+
+  // changeImagePath = (event) => {
+  //   let user = this.state.user
+  //   user.image = event.target.value
+  //   user.image.replace("C:\\fakepath\\", '')
+  //   this.setState({
+  //     user
+  //   })
+  // }
     //this.props.messageShow('Signing you up, please wait...')
 
   //   this.props.register(this.state.user)
@@ -121,10 +135,21 @@ class EditProfileForm extends Component {
                 style={{ marginTop: '1em' }}
               />
 
-              {/* Image */}
+              {/* Image
               <Input
                 type="file"
                 accept="image/*"
+                fullWidth={true}
+                placeholder="Image"
+                name="image"
+                value={this.state.user.image}
+                onChange={this.onChange}
+                style={{ marginTop: '1em' }}
+              /> */}
+
+              {/* image */}
+              <Input
+                type="text"
                 fullWidth={true}
                 placeholder="Image"
                 name="image"
@@ -148,10 +173,54 @@ class EditProfileForm extends Component {
               <Input
                 type="text"
                 fullWidth={true}
-                placeholder="Shipping Address"
+                placeholder="Address_Line1"
                 required="required"
-                name="shipping"
-                value={this.state.user.shipping}
+                name="adressLine1"
+                value={this.state.user.adressLine1}
+                onChange={this.onChange}
+                style={{ marginTop: '1em' }}
+              />
+
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder="Address_Line2"
+                required='false'
+                name="addressLine2"
+                value={this.state.user.addressLine2}
+                onChange={this.onChange}
+                style={{ marginTop: '1em' }}
+              />  
+
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder="City"
+                required="required"
+                name="city"
+                value={this.state.user.city}
+                onChange={this.onChange}
+                style={{ marginTop: '1em' }}
+              />
+
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder="State"
+                required="required"
+                name="state"
+                value={this.state.user.state}
+                onChange={this.onChange}
+                style={{ marginTop: '1em' }}
+              />
+
+              <Input
+                type="text"
+                fullWidth={true}
+                placeholder="Zipcode"
+                required="required"
+                name="zipCode"
+                value={this.state.user.zipCode}
                 onChange={this.onChange}
                 style={{ marginTop: '1em' }}
               />

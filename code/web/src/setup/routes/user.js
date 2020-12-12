@@ -4,6 +4,7 @@ import Signup from '../../modules/user/Signup'
 import Profile from '../../modules/user/Profile'
 import Subscriptions from '../../modules/user/Subscriptions'
 import EditProfileForm from '../../modules/user/EditProfileForm'
+import ProfilePicture from '../../modules/user/ProfilePicture'
 
 // User routes
 export default {
@@ -32,5 +33,10 @@ export default {
   editProfile: {
     path: '/user/editprofile',
     component: EditProfileForm,
+  }, 
+
+  profileImage: {
+    path: '/user/profile/image',
+    component: ProfilePicture
   }
 }

@@ -85,6 +85,7 @@ export function register(userDetails) {
 }
 
 export function editProfile(user) {
+  console.log(user, 'fuck')
   return dispatch => {
     dispatch({
       type: EDIT_PROFILE,
@@ -92,9 +93,25 @@ export function editProfile(user) {
     })
     return axios.post(routeApi, mutation({
       operation: 'userUpdate',
-      variables: user,
-      fields: ['user {id, name, email, image, description}']
-    }))  
+      variables: {
+        id: user.id, 
+        name: user.name,
+        email: user.email, 
+        password: user.password,
+        description: user.description,
+        image: user.image,
+        shipping: user.shipping,
+        availableDate: user.availableDate,
+        history: user.history
+      },
+      fields: ['user {id, name, email, password, image, description, shipping, availableDate, history}']
+    }))
+     .then(response => {
+       console.log(response, "these ARE the droids you're looking for")
+     })
+     .catch(error => {
+       console.log(error)
+     })
   }
 }
 

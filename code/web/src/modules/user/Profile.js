@@ -37,7 +37,9 @@ const Profile = (props) => (
       <GridCell style={{ padding: '2em', textAlign: 'center' }}>
         <ProfilePicture />
         <H4 style={{ marginBottom: '0.5em' }}>{props.user.details.name}</H4>
+        <p style={{ color: grey2, marginBottom: '2em' }}>{props.user.details.description}</p>
         <p style={{ color: grey2, marginBottom: '2em' }}>{props.user.details.email}</p>
+        
 
         <Link to={userRoutes.editProfile.path}>
           <Button style={{ margin: '0.5em'}} theme="primary">Edit Profile</Button>

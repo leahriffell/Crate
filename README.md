@@ -1,6 +1,17 @@
 ![Crate](https://raw.githubusercontent.com/atulmy/atulmy.github.io/master/images/crate/hero-with-link.png)
 
 # Crate 👕👖📦
+Crate is a website for users to subscribe to a monthly shipment of clothes and accessories. 
+
+As a full-stack team (3 front-end, 3 back-end), we came together to add additional functionality and implement a test suite on the existing codebase. Here's a [video](https://www.youtube.com/watch?v=lzBo8HNIN-k&t=9s) of us explaining what we accomplished and how we approached a legacy codebase. 
+
+#### Team
+- Eric Berglund ([GitHub](https://github.com/ericberglund117) | [LinkedIn](https://www.linkedin.com/in/eric-berglund117/))
+- Judith Pillado ([GitHub](https://github.com/judithpillado) | [LinkedIn](https://www.linkedin.com/in/judith-pillado/))
+- Priya Power ([GitHub](https://github.com/priyapower) | [LinkedIn](https://www.linkedin.com/in/priya-power/))
+- Leah Riffell ([GitHub](https://github.com/leahriffell) | [LinkedIn](https://www.linkedin.com/in/leah-riffell/))
+- Katy St Sauveur ([GitHub](https://github.com/krogowsk531) | [LinkedIn](https://www.linkedin.com/in/krogowsk531/))
+- Naomi Ware ([GitHub](https://github.com/nware1066) | [LinkedIn](https://www.linkedin.com/in/naomi-ware-083332b8/))
 
 #### Get monthly subscription of trendy clothes and accessories.
 - **API** built with Node, GraphQL, Express, Sequelize (MySQL) and JWT Auth
